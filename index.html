@@ -162,6 +162,48 @@
         .underline-link {
             text-decoration: underline;
         }
+        .card-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .card {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 350px;
+            padding: 20px;
+            margin: 15px;
+            transition: transform 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-10px);
+        }
+        .card ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .card li {
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+        .card a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        .card a:hover {
+            text-decoration: underline;
+        }
+        .emoji {
+            margin-right: 10px;
+        }
+        .card-footer {
+            text-align: center;
+            font-style: italic;
+            margin-top: 10px;
+        }
       </style>
     
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -182,15 +224,16 @@
 </div>
     <br>
     <br>
-    <div>
-    <ul>
-        <li>☠️ An infosec guy who's constantly seeking knowledge. Do purple 💜, but more in love with Red ❤️.</li>
-        <li>🧑‍💻 Offensive Security Researcher @ <strong><a href="https://www.cytomate.net">Cytomate.</a></strong></li>
-        <li>🔭 I’m currently working on <strong>Adversary Emulation, Red Team, Malware Development, and Breach & Attack Simulation.</strong></li>
-        <li>🤝 I’m in love to perform <strong>Adversary Emulation, Security Controls Validation, Red Teaming and Proactive Threat Hunting.</strong></li>
-        <li>📝 I regularly write articles on <strong><a href="https://medium.com/@merasor07">Medium.</a></strong></li>
-        <li>⚡ Fun fact I think I am funny</li>
-    </ul>
+   <div class="card-container">
+    <div class="card">
+        <ul>
+            <li><span class="emoji">☠️</span>An infosec guy who's constantly seeking knowledge. Do purple 💜, but more in love with Red ❤️.</li>
+            <li><span class="emoji">🧑‍💻</span>Offensive Security Researcher @ <strong><a href="https://www.cytomate.net">Cytomate</a>.</strong></li>
+            <li><span class="emoji">🔭</span>I’m currently working on <strong>Adversary Emulation, Red Team, Malware Development, and Breach & Attack Simulation.</strong></li>
+            <li><span class="emoji">🤝</span>I’m in love with <strong>Adversary Emulation, Security Controls Validation, Red Teaming, and Proactive Threat Hunting.</strong></li>
+            <li><span class="emoji">📝</span>I regularly write articles on <strong><a href="https://medium.com/@merasor07">Medium</a></strong>.</li>
+            <li><span class="emoji">⚡</span>Fun fact: I think I am funny.</li>
+        </ul>
 </div>
     <h1 align="center">Cybersecurity series</h1>
     <div class="project-table">
