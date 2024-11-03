@@ -218,25 +218,50 @@
 </head>
 <body>
     
-<div>
+<div style="background-color: #f0f8ff; padding: 40px; border-radius: 20px; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);">
     <h1 style="
         text-align: center; 
-        font-size: 2.5em; 
-        font-family: 'Arial', sans-serif; 
-        color: #4A90E2; 
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); 
-        margin: 20px 0; 
-        padding: 10px; 
-        border: 2px solid #4A90E2; 
-        border-radius: 10px; 
-        background-color: #f0f8ff; 
-        transition: transform 0.3s; 
-    " 
-    onmouseover="this.style.transform='scale(1.05)';" 
-    onmouseout="this.style.transform='scale(1)';">
+        font-size: 3.5em; 
+        font-family: 'Montserrat', sans-serif; 
+        color: transparent; 
+        background: linear-gradient(135deg, #4A90E2, #D0021B); 
+        -webkit-background-clip: text; 
+        background-clip: text; 
+        text-shadow: 4px 4px 6px rgba(0, 0, 0, 0.3); 
+        margin: 0; 
+        padding: 10px 0; 
+        animation: fadeIn 1.5s ease-in-out; 
+        position: relative; 
+        overflow: hidden; 
+    ">
         Welcome to my professional portfolio, a centralized hub where you can access a comprehensive collection of my cybersecurity series, blogs, and projects, expertly organized for your exploration and insight.
     </h1>
+    <span style="
+        position: absolute; 
+        left: 50%; 
+        top: 50%; 
+        transform: translate(-50%, -50%); 
+        font-size: 0.5em; 
+        color: rgba(255, 255, 255, 0.1); 
+        white-space: nowrap; 
+        pointer-events: none; 
+        animation: pulse 4s infinite; 
+    ">
+        Cybersecurity | Innovation | Portfolio
+    </span>
 </div>
+
+<style>
+    @keyframes fadeIn {
+        0% { opacity: 0; }
+        100% { opacity: 1; }
+    }
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+        100% { transform: scale(1); }
+    }
+</style>
 
     
     <br>
