@@ -307,253 +307,236 @@
        <br>
     <h2 style="text-align: center; font-size: 36px; font-weight: bold; margin-bottom: 40px;">Pinned projects</h2>
 
-    <div class="container">
-        <!-- Card 1 -->
-        <a href="https://github.com/Offensive-Panda/RWX_MEMEORY_HUNT_AND_INJECTION_DV" class="card-link">
-        <div class="card">
-            <div class="badge">Public</div>
-            <div class="card-title">RWX MEMORY HUNT AND INJECTION DV</div>
-            <div class="card-description">
-            Abusing Windows fork API and OneDrive.exe process to inject the malicious shellcode without allocating new RWX memory region. This technique is finding RWX region in already running processes in this case OneDrive.exe and Write shellcode into that region and execute it without calling VirtualProtect, VirtualAllocEx, VirtualAlloc.
+   <div class="container" style="display: flex; flex-wrap: wrap; justify-content: center; padding: 10px;">
+
+    <!-- Card 1 -->
+    <a href="https://github.com/Offensive-Panda/RWX_MEMEORY_HUNT_AND_INJECTION_DV" class="card-link" style="text-decoration: none; margin: 10px; flex: 1 1 300px; max-width: 300px;">
+        <div class="card" style="border: 1px solid #ccc; border-radius: 8px; padding: 15px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
+            <div class="badge" style="background-color: #28a745; color: white; padding: 5px; border-radius: 5px; text-align: center;">Public</div>
+            <div class="card-title" style="font-weight: bold; margin-top: 10px; font-size: 1.2em;">RWX MEMORY HUNT AND INJECTION DV</div>
+            <div class="card-description" style="margin-top: 5px; font-size: 0.9em;">
+                Abusing Windows fork API and OneDrive.exe process to inject the malicious shellcode without allocating new RWX memory region. This technique is finding RWX region in already running processes in this case OneDrive.exe and Write shellcode into that region and execute it without calling VirtualProtect, VirtualAllocEx, VirtualAlloc.
             </div>
-            <div class="meta">
-                <div class="stats">
+            <div class="meta" style="margin-top: 10px; display: flex; justify-content: space-between; align-items: center;">
+                <div class="stats" style="font-size: 0.8em;">
                     <span><i class="fas fa-code-branch"></i> <span id="rwx-forks"></span></span>
                     <span><i class="fas fa-star"></i> <span id="rwx-stars"></span></span>
                 </div>
-                <div class="language">
+                <div class="language" style="font-size: 0.9em;">
                     🔴 C++
                 </div>
             </div>
         </div>
-        </a>
-        <!-- Card 2 -->
-        <a href="https://github.com/Offensive-Panda/DV_NEW" class="card-link">
-        <div class="card">
-            <div class="badge">Public</div>
-            <div class="card-title">Dirty Vanity New (DV_NEW)</div>
-            <div class="card-description">
+    </a>
+
+    <!-- Card 2 -->
+    <a href="https://github.com/Offensive-Panda/DV_NEW" class="card-link" style="text-decoration: none; margin: 10px; flex: 1 1 300px; max-width: 300px;">
+        <div class="card" style="border: 1px solid #ccc; border-radius: 8px; padding: 15px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
+            <div class="badge" style="background-color: #28a745; color: white; padding: 5px; border-radius: 5px; text-align: center;">Public</div>
+            <div class="card-title" style="font-weight: bold; margin-top: 10px; font-size: 1.2em;">Dirty Vanity New (DV_NEW)</div>
+            <div class="card-description" style="margin-top: 5px; font-size: 0.9em;">
                 This is the combination of multiple evasion techniques. It is using direct syscalls to bypass user-mode EDR hooking and also to avoid static detection of syscalls instruction in stub I am using egg hunt technique. Egg hunt will place random bytes using DB instruction in syscall stub in the place of syscalls instructions and on run time it patch again those bytes with syscall instruction to transit into kernel.
             </div>
-            <div class="meta">
-                <div class="stats">
+            <div class="meta" style="margin-top: 10px; display: flex; justify-content: space-between; align-items: center;">
+                <div class="stats" style="font-size: 0.8em;">
                     <span><i class="fas fa-code-branch"></i> <span id="repo2-forks"></span></span>
                     <span><i class="fas fa-star"></i> <span id="repo2-stars"></span></span>
                 </div>
-                <div class="language">
-                    🔴 C++
-                    🟢 C
-                    🟡 Assembly 
+                <div class="language" style="font-size: 0.9em;">
+                    🔴 C++ 🟢 C 🟡 Assembly 
                 </div>
             </div>
         </div>
-        </a>
-        <!-- Card 3 -->
-        <a href="https://github.com/Offensive-Panda/D3MPSEC" class="card-link">
-        <div class="card">
-            <div class="badge">Public</div>
-            <div class="card-title">Lsass Memory Dumping (D3MPSEC)</div>
-            <div class="card-description">
+    </a>
+
+    <!-- Card 3 -->
+    <a href="https://github.com/Offensive-Panda/D3MPSEC" class="card-link" style="text-decoration: none; margin: 10px; flex: 1 1 300px; max-width: 300px;">
+        <div class="card" style="border: 1px solid #ccc; border-radius: 8px; padding: 15px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
+            <div class="badge" style="background-color: #28a745; color: white; padding: 5px; border-radius: 5px; text-align: center;">Public</div>
+            <div class="card-title" style="font-weight: bold; margin-top: 10px; font-size: 1.2em;">Lsass Memory Dumping (D3MPSEC)</div>
+            <div class="card-description" style="margin-top: 5px; font-size: 0.9em;">
                 "D3MPSEC" is a memory dumping tool designed to extract memory dump from Lsass process using various techniques, including direct system calls, randomized procedures, and prototype name obfuscation. Its primary purpose is to bypass both static and dynamic analysis techniques commonly employed by security measures.
             </div>
-            <div class="meta">
-                <div class="stats">
+            <div class="meta" style="margin-top: 10px; display: flex; justify-content: space-between; align-items: center;">
+                <div class="stats" style="font-size: 0.8em;">
                     <span><i class="fas fa-code-branch"></i> <span id="repo3-forks"></span></span>
                     <span><i class="fas fa-star"></i> <span id="repo3-stars"></span></span>
                 </div>
-                <div class="language">
-                    🔴 C++
-                    🟢 C
-                    🟡 Assembly 
+                <div class="language" style="font-size: 0.9em;">
+                    🔴 C++ 🟢 C 🟡 Assembly 
                 </div>
             </div>
         </div>
-        </a>
-        <!-- Card 4 -->
-        <a href="https://github.com/Offensive-Panda/LsassReflectDumping" class="card-link">
-        <div class="card">
-            <div class="badge">Public</div>
-            <div class="card-title">Lsass Reflect Dumping</div>
-            <div class="card-description">
+    </a>
+
+    <!-- Card 4 -->
+    <a href="https://github.com/Offensive-Panda/LsassReflectDumping" class="card-link" style="text-decoration: none; margin: 10px; flex: 1 1 300px; max-width: 300px;">
+        <div class="card" style="border: 1px solid #ccc; border-radius: 8px; padding: 15px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
+            <div class="badge" style="background-color: #28a745; color: white; padding: 5px; border-radius: 5px; text-align: center;">Public</div>
+            <div class="card-title" style="font-weight: bold; margin-top: 10px; font-size: 1.2em;">Lsass Reflect Dumping</div>
+            <div class="card-description" style="margin-top: 5px; font-size: 0.9em;">
                 This tool leverages the Process Forking technique using the RtlCreateProcessReflection API to clone the lsass.exe process. Once the clone is created, it utilizes MINIDUMP_CALLBACK_INFORMATION callbacks to generate a memory dump of the cloned process. Mimikatz and Pypykatz can be used offline to parse and extract the hashes.
             </div>
-            <div class="meta">
-                <div class="stats">
+            <div class="meta" style="margin-top: 10px; display: flex; justify-content: space-between; align-items: center;">
+                <div class="stats" style="font-size: 0.8em;">
                     <span><i class="fas fa-code-branch"></i> <span id="repo4-forks"></span></span>
                     <span><i class="fas fa-star"></i> <span id="repo4-stars"></span></span>
                 </div>
-                <div class="language">
+                <div class="language" style="font-size: 0.9em;">
                     🔴 C++
                 </div>
             </div>
         </div>
-        </a>
-        <!-- Card 5 -->
-        <a href="https://github.com/Offensive-Panda/DefenseEvasionTechniques" class="card-link">
-        <div class="card">
-            <div class="badge">Public</div>
-            <div class="card-title">Defense Evasion Techniques</div>
-            <div class="card-description">
-                This comprehensive and central repository is designed for cybersecurity enthusiasts, researchers, and professionals seeking to stay ahead in the field. It provides a valuable resource for those dedicated to improving their skills in malware development, offensive security, and security defenses.
+    </a>
+
+    <!-- Card 5 -->
+    <a href="https://github.com/Offensive-Panda/DefenseEvasionTechniques" class="card-link" style="text-decoration: none; margin: 10px; flex: 1 1 300px; max-width: 300px;">
+        <div class="card" style="border: 1px solid #ccc; border-radius: 8px; padding: 15px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
+            <div class="badge" style="background-color: #28a745; color: white; padding: 5px; border-radius: 5px; text-align: center;">Public</div>
+            <div class="card-title" style="font-weight: bold; margin-top: 10px; font-size: 1.2em;">Defense Evasion Techniques</div>
+            <div class="card-description" style="margin-top: 5px; font-size: 0.9em;">
+                Defense Evasion Techniques is a collection of various methods used to bypass detection and evasion from modern security solutions. The collection showcases multiple attack vectors and their respective methodologies.
             </div>
-            <div class="meta">
-                <div class="stats">
+            <div class="meta" style="margin-top: 10px; display: flex; justify-content: space-between; align-items: center;">
+                <div class="stats" style="font-size: 0.8em;">
                     <span><i class="fas fa-code-branch"></i> <span id="repo5-forks"></span></span>
                     <span><i class="fas fa-star"></i> <span id="repo5-stars"></span></span>
                 </div>
-                <div class="language">
-                    🔴 C++
-                    🟢 C
-                    🟡 Assembly 
-                    🟣 Batch
-                    🟠 C#
-                </div>
-            </div>
-        </div>
-        </a>
-        <!-- Card 6 -->
-        <a href="https://github.com/Offensive-Panda/ProcessInjectionTechniques" class="card-link">
-        <div class="card">
-            <div class="badge">Public</div>
-            <div class="card-title">Process Injection Techniques</div>
-            <div class="card-description">
-                This comprehensive process injection series is crafted for cybersecurity enthusiasts, researchers, and professionals who aim to stay at the forefront of the field. It serves as a central repository of knowledge, offering in-depth exploration of various process injection techniques used by adversaries.
-            </div>
-            <div class="meta">
-                <div class="stats">
-                    <span><i class="fas fa-code-branch"></i> <span id="repo6-forks"></span></span>
-                    <span><i class="fas fa-star"></i> <span id="repo6-stars"></span></span>
-                </div>
-                <div class="language">
-                    🔴 C++
-                    🟢 C
-                    🟡 Assembly 
-                    🟣 Batch
-                </div>
-            </div>
-        </div>
-        </a>
-         <!-- Card 7 -->
-         <a href="https://github.com/Offensive-Panda/NT-AUTHORITY-SYSTEM-CONTEXT-RTCORE" class="card-link">
-         <div class="card">
-            <div class="badge">Public</div>
-            <div class="card-title">NT-AUTHORITY-SYSTEM-CONTEXT-RTCORE</div>
-            <div class="card-description">
-                This exploit rebuilds and exploit the CVE-2019-16098 which is in driver Micro-Star MSI Afterburner 4.6.2.15658 (aka RTCore64.sys and RTCore32.sys) allows any authenticated user to read and write to arbitrary memory, I/O ports, and MSRs. Instead of hardcoded base address of Ntoskrnl.exe, I calculated it dynamically and recalculated all offsets for new version of windows.
-            </div>
-            <div class="meta">
-                <div class="stats">
-                    <span><i class="fas fa-code-branch"></i> <span id="repo6-forks"></span></span>
-                    <span><i class="fas fa-star"></i> <span id="repo6-stars"></span></span>
-                </div>
-                <div class="language">
+                <div class="language" style="font-size: 0.9em;">
                     🔴 C++
                 </div>
             </div>
         </div>
-        </a>
-         <!-- Card 8 -->
-         <a href="https://github.com/Offensive-Panda/WPM-MAJIC-ENTRY-POINT-INJECTION" class="card-link">
-         <div class="card">
-            <div class="badge">Public</div>
-            <div class="card-title">WPM-MAJIC-ENTRY-POINT-INJECTION</div>
-            <div class="card-description">
-                This exploit is utilising AddressOfEntryPoint of process which is RX and using WriteProcessMemory internal magic to change the permission and write the shellcode. Exploit also using direct syscalls to bypass user-mode hooking of AV/EDRs. This technique is avoiding the usage of VirtualAlloc, VirtualProtect APIs directly inside the code. The working of VirtualProtect will be covered by WPM magic.
+    </a>
+       <!-- Card 6 -->
+<a href="https://github.com/Offensive-Panda/ProcessInjectionTechniques" class="card-link" style="text-decoration: none; display: inline-block; width: calc(33.333% - 20px); margin: 10px; vertical-align: top;">
+    <div class="card" style="border: 1px solid #ddd; border-radius: 8px; padding: 15px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); background-color: #fff; transition: box-shadow 0.3s;">
+        <div class="badge" style="background-color: #28a745; color: #fff; padding: 5px 10px; border-radius: 5px; font-size: 0.8em;">Public</div>
+        <div class="card-title" style="font-weight: bold; font-size: 1.2em; margin: 10px 0;">Process Injection Techniques</div>
+        <div class="card-description" style="font-size: 0.9em; color: #333;">This comprehensive process injection series is crafted for cybersecurity enthusiasts, researchers, and professionals who aim to stay at the forefront of the field. It serves as a central repository of knowledge, offering in-depth exploration of various process injection techniques used by adversaries.</div>
+        <div class="meta" style="margin-top: 10px;">
+            <div class="stats" style="font-size: 0.9em; color: #555;">
+                <span style="margin-right: 10px;"><i class="fas fa-code-branch"></i> <span id="repo6-forks"></span></span>
+                <span><i class="fas fa-star"></i> <span id="repo6-stars"></span></span>
             </div>
-            <div class="meta">
-                <div class="stats">
-                    <span><i class="fas fa-code-branch"></i> <span id="repo6-forks"></span></span>
-                    <span><i class="fas fa-star"></i> <span id="repo6-stars"></span></span>
-                </div>
-                <div class="language">
-                    🔴 C++
-                    🟢 C
-                    🟡 Assembly 
-                </div>
+            <div class="language" style="font-size: 0.9em; color: #555;">
+                🔴 C++ 🟢 C 🟡 Assembly 🟣 Batch
             </div>
         </div>
-        </a>
-         <!-- Card 9 -->
-         <a href="https://github.com/Offensive-Panda/.NET_PROFILER_DLL_LOADING" class="card-link">
-         <div class="card">
-            <div class="badge">Public</div>
-            <div class="card-title">.NET_PROFILER_DLL_LOADING</div>
-            <div class="card-description">
-                .NET profiler DLL loading can be abused to make a legit .NET application load a malicious DLL using environment variables. This exploit is loading a malicious DLL using Task Scheduler (MMC) to bypass UAC and getting admin privileges.
+    </div>
+</a>
+
+<!-- Card 7 -->
+<a href="https://github.com/Offensive-Panda/NT-AUTHORITY-SYSTEM-CONTEXT-RTCORE" class="card-link" style="text-decoration: none; display: inline-block; width: calc(33.333% - 20px); margin: 10px; vertical-align: top;">
+    <div class="card" style="border: 1px solid #ddd; border-radius: 8px; padding: 15px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); background-color: #fff; transition: box-shadow 0.3s;">
+        <div class="badge" style="background-color: #28a745; color: #fff; padding: 5px 10px; border-radius: 5px; font-size: 0.8em;">Public</div>
+        <div class="card-title" style="font-weight: bold; font-size: 1.2em; margin: 10px 0;">NT-AUTHORITY-SYSTEM-CONTEXT-RTCORE</div>
+        <div class="card-description" style="font-size: 0.9em; color: #333;">This exploit rebuilds and exploits CVE-2019-16098, which exists in the Micro-Star MSI Afterburner driver (RTCore64.sys and RTCore32.sys). It allows any authenticated user to read and write to arbitrary memory, I/O ports, and MSRs, dynamically calculating offsets for the latest Windows versions.</div>
+        <div class="meta" style="margin-top: 10px;">
+            <div class="stats" style="font-size: 0.9em; color: #555;">
+                <span style="margin-right: 10px;"><i class="fas fa-code-branch"></i> <span id="repo7-forks"></span></span>
+                <span><i class="fas fa-star"></i> <span id="repo7-stars"></span></span>
             </div>
-            <div class="meta">
-                <div class="stats">
-                    <span><i class="fas fa-code-branch"></i> <span id="repo6-forks"></span></span>
-                    <span><i class="fas fa-star"></i> <span id="repo6-stars"></span></span>
-                </div>
-                <div class="language">
-                    🔴 C++
-                    🟢 C
-                </div>
+            <div class="language" style="font-size: 0.9em; color: #555;">
+                🔴 C++
             </div>
         </div>
-        </a>
-         <!-- Card 10 -->
-         <a href="https://github.com/Offensive-Panda/PEB_WALK_AND_API_OBFUSCATION_INJECTION" class="card-link">
-         <div class="card">
-            <div class="badge">Public</div>
-            <div class="card-title">PEB_WALK_AND_API_OBFUSCATION_INJECTION</div>
-            <div class="card-description">
-                This exploit use PEB walk technique to resolve API calls dynamically and obfuscate all API calls to perform process injection. These technqies will help to bypass static analysis of AV/EDR solutions.
+    </div>
+</a>
+
+<!-- Card 8 -->
+<a href="https://github.com/Offensive-Panda/WPM-MAJIC-ENTRY-POINT-INJECTION" class="card-link" style="text-decoration: none; display: inline-block; width: calc(33.333% - 20px); margin: 10px; vertical-align: top;">
+    <div class="card" style="border: 1px solid #ddd; border-radius: 8px; padding: 15px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); background-color: #fff; transition: box-shadow 0.3s;">
+        <div class="badge" style="background-color: #28a745; color: #fff; padding: 5px 10px; border-radius: 5px; font-size: 0.8em;">Public</div>
+        <div class="card-title" style="font-weight: bold; font-size: 1.2em; margin: 10px 0;">WPM-MAJIC-ENTRY-POINT-INJECTION</div>
+        <div class="card-description" style="font-size: 0.9em; color: #333;">This exploit utilizes the AddressOfEntryPoint of a process which is RX and uses WriteProcessMemory to change permissions and write shellcode. It employs direct syscalls to bypass user-mode hooking of AV/EDRs, avoiding the usage of VirtualAlloc and VirtualProtect APIs.</div>
+        <div class="meta" style="margin-top: 10px;">
+            <div class="stats" style="font-size: 0.9em; color: #555;">
+                <span style="margin-right: 10px;"><i class="fas fa-code-branch"></i> <span id="repo8-forks"></span></span>
+                <span><i class="fas fa-star"></i> <span id="repo8-stars"></span></span>
             </div>
-            <div class="meta">
-                <div class="stats">
-                    <span><i class="fas fa-code-branch"></i> <span id="repo6-forks"></span></span>
-                    <span><i class="fas fa-star"></i> <span id="repo6-stars"></span></span>
-                </div>
-                <div class="language">
-                    🔴 C++
-                </div>
-            </div>
-        </div>
-        </a>
-         <!-- Card 11 -->
-         <a href="https://github.com/Offensive-Panda/Collect_Threat_Intel_AND_Malware_Using_Honeypots" class="card-link">
-         <div class="card">
-            <div class="badge">Public</div>
-            <div class="card-title">Collect_Threat_Intel_AND_Malware_Using_Honeypots</div>
-            <div class="card-description">
-                This code run as a service and monitoring all sysmon event logs and take action based on events generated by attacker's activities. Upload all dropped and created malwares, files on server for further analysis. This captures all commands executed by attacker on a system. This can be deployed in production as well in high-interaction honeypot systems to monitor attack activities.
-            </div>
-            <div class="meta">
-                <div class="stats">
-                    <span><i class="fas fa-code-branch"></i> <span id="repo6-forks"></span></span>
-                    <span><i class="fas fa-star"></i> <span id="repo6-stars"></span></span>
-                </div>
-                <div class="language">
-                    🟠 C#
-                </div>
+            <div class="language" style="font-size: 0.9em; color: #555;">
+                🔴 C++ 🟢 C 🟡 Assembly 
             </div>
         </div>
-        </a>
-         <!-- Card 12 -->
-         <a href="https://github.com/Offensive-Panda/MalwareAnalysis" class="card-link">
-         <div class="card">
-            <div class="badge">Public</div>
-            <div class="card-title">Malware Analysis</div>
-            <div class="card-description">
-                This central repository is crafted for cybersecurity enthusiasts, researchers, and professionals aiming to advance their skills. It offers valuable resources for those focused on analyzing and understanding different types of malware.
+    </div>
+</a>
+
+<!-- Card 9 -->
+<a href="https://github.com/Offensive-Panda/.NET_PROFILER_DLL_LOADING" class="card-link" style="text-decoration: none; display: inline-block; width: calc(33.333% - 20px); margin: 10px; vertical-align: top;">
+    <div class="card" style="border: 1px solid #ddd; border-radius: 8px; padding: 15px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); background-color: #fff; transition: box-shadow 0.3s;">
+        <div class="badge" style="background-color: #28a745; color: #fff; padding: 5px 10px; border-radius: 5px; font-size: 0.8em;">Public</div>
+        <div class="card-title" style="font-weight: bold; font-size: 1.2em; margin: 10px 0;">.NET_PROFILER_DLL_LOADING</div>
+        <div class="card-description" style="font-size: 0.9em; color: #333;">This exploit abuses .NET profiler DLL loading to make a legitimate .NET application load a malicious DLL using environment variables. It uses Task Scheduler to bypass UAC and gain admin privileges.</div>
+        <div class="meta" style="margin-top: 10px;">
+            <div class="stats" style="font-size: 0.9em; color: #555;">
+                <span style="margin-right: 10px;"><i class="fas fa-code-branch"></i> <span id="repo9-forks"></span></span>
+                <span><i class="fas fa-star"></i> <span id="repo9-stars"></span></span>
             </div>
-            <div class="meta">
-                <div class="stats">
-                    <span><i class="fas fa-code-branch"></i> <span id="repo6-forks"></span></span>
-                    <span><i class="fas fa-star"></i> <span id="repo6-stars"></span></span>
-                </div>
-                <div class="language">
-                    🔴 C++
-                    🟢 C
-                    🟡 Assembly 
-                    🟣 Batch
-                    🟠 C#
-                </div>
+            <div class="language" style="font-size: 0.9em; color: #555;">
+                🔴 C++ 🟢 C
             </div>
         </div>
-        </a>
+    </div>
+</a>
+
+<!-- Card 10 -->
+<a href="https://github.com/Offensive-Panda/PEB_WALK_AND_API_OBFUSCATION_INJECTION" class="card-link" style="text-decoration: none; display: inline-block; width: calc(33.333% - 20px); margin: 10px; vertical-align: top;">
+    <div class="card" style="border: 1px solid #ddd; border-radius: 8px; padding: 15px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); background-color: #fff; transition: box-shadow 0.3s;">
+        <div class="badge" style="background-color: #28a745; color: #fff; padding: 5px 10px; border-radius: 5px; font-size: 0.8em;">Public</div>
+        <div class="card-title" style="font-weight: bold; font-size: 1.2em; margin: 10px 0;">PEB_WALK_AND_API_OBFUSCATION_INJECTION</div>
+        <div class="card-description" style="font-size: 0.9em; color: #333;">This research illustrates the concept of PEB walking, obfuscation, and API injection, providing a deeper understanding of the mechanisms employed in advanced evasion techniques.</div>
+        <div class="meta" style="margin-top: 10px;">
+            <div class="stats" style="font-size: 0.9em; color: #555;">
+                <span style="margin-right: 10px;"><i class="fas fa-code-branch"></i> <span id="repo10-forks"></span></span>
+                <span><i class="fas fa-star"></i> <span id="repo10-stars"></span></span>
+            </div>
+            <div class="language" style="font-size: 0.9em; color: #555;">
+                🔴 C++
+            </div>
+        </div>
+    </div>
+</a>
+   <!-- Card 11 -->
+<a href="https://github.com/Offensive-Panda/Collect_Threat_Intel_AND_Malware_Using_Honeypots" class="card-link" style="text-decoration: none; display: inline-block; width: calc(33.333% - 20px); margin: 10px; vertical-align: top;">
+    <div class="card" style="border: 1px solid #ddd; border-radius: 8px; padding: 15px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); background-color: #fff; transition: box-shadow 0.3s;">
+        <div class="badge" style="background-color: #28a745; color: #fff; padding: 5px 10px; border-radius: 5px; font-size: 0.8em;">Public</div>
+        <div class="card-title" style="font-weight: bold; font-size: 1.2em; margin: 10px 0;">Collect Threat Intel and Malware Using Honeypots</div>
+        <div class="card-description" style="font-size: 0.9em; color: #333;">
+            This code runs as a service, monitoring all Sysmon event logs and taking action based on events generated by attacker's activities. It uploads all dropped and created malware files to a server for further analysis, capturing all commands executed by the attacker on a system. This can be deployed in production as well as in high-interaction honeypot systems to monitor attack activities.
+        </div>
+        <div class="meta" style="margin-top: 10px;">
+            <div class="stats" style="font-size: 0.9em; color: #555;">
+                <span style="margin-right: 10px;"><i class="fas fa-code-branch"></i> <span id="repo11-forks"></span></span>
+                <span><i class="fas fa-star"></i> <span id="repo11-stars"></span></span>
+            </div>
+            <div class="language" style="font-size: 0.9em; color: #555;">
+                🟠 C#
+            </div>
+        </div>
+    </div>
+</a>
+
+<!-- Card 12 -->
+<a href="https://github.com/Offensive-Panda/MalwareAnalysis" class="card-link" style="text-decoration: none; display: inline-block; width: calc(33.333% - 20px); margin: 10px; vertical-align: top;">
+    <div class="card" style="border: 1px solid #ddd; border-radius: 8px; padding: 15px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); background-color: #fff; transition: box-shadow 0.3s;">
+        <div class="badge" style="background-color: #28a745; color: #fff; padding: 5px 10px; border-radius: 5px; font-size: 0.8em;">Public</div>
+        <div class="card-title" style="font-weight: bold; font-size: 1.2em; margin: 10px 0;">Malware Analysis</div>
+        <div class="card-description" style="font-size: 0.9em; color: #333;">
+            This central repository is crafted for cybersecurity enthusiasts, researchers, and professionals aiming to advance their skills. It offers valuable resources for those focused on analyzing and understanding different types of malware.
+        </div>
+        <div class="meta" style="margin-top: 10px;">
+            <div class="stats" style="font-size: 0.9em; color: #555;">
+                <span style="margin-right: 10px;"><i class="fas fa-code-branch"></i> <span id="repo12-forks"></span></span>
+                <span><i class="fas fa-star"></i> <span id="repo12-stars"></span></span>
+            </div>
+            <div class="language" style="font-size: 0.9em; color: #555;">
+                🔴 C++ 🟢 C 🟡 Assembly 🟣 Batch 🟠 C#
+            </div>
+        </div>
+    </div>
+</a>
+
     </div>
 
     <div class="pagination">
