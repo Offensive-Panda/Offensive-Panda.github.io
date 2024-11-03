@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #302a2a;
+            color: #c9d1d9;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        .card {
+            background-color: #161b22;
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid #30363d;
+            position: relative;
+        }
+        .card-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #58a6ff;
+        }
+        .card-description {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #8b949e;
+        }
+        .badge {
+            background-color: #21262d;
+            color: #8b949e;
+            border-radius: 5px;
+            padding: 3px 8px;
+            font-size: 12px;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+        .meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            color: #8b949e;
+        }
+        .meta .stats {
+            display: flex;
+            gap: 10px;
+        }
+        .meta .stats span {
+            display: flex;
+            align-items: center;
+        }
+        .meta .stats i {
+            margin-right: 5px;
+            color: #8b949e;
+        }
+        .language {
+            color: #58a6ff;
+            font-size: 12px;
+        }
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .pagination button {
+            background-color: #58a6ff;
+            border: none;
+            border-radius: 5px;
+            color: #ffffff;
+            padding: 10px 20px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        .pagination button.disabled {
+            background-color: #30363d;
+            cursor: not-allowed;
+        }
+        .pagination button.back {
+            background-color: #ff5f5f;
+        }
+        .pagination button.next {
+            background-color: #5fafff;
+        }
+    
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #D3D3D3;
+        }
+        a {
+            color: #dee90988;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .social-icons img {
+            margin: 0 5px;
+        }
+        .languages img {
+            margin: 0 5px;
+        }
+        .project-table {
+            margin: 20px;
+            width: 90%;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .project-table th {
+            background-color: #2d063a;
+        }
+        .button-container {
+            text-align: center; /* Center the buttons */
+            margin-top: 20px;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 5px;
+            color: #fff;
+            background-color: #333; /* Dark background color */
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        .button:hover {
+            background-color: #555; /* Lighter background color on hover */
+        }
+        .button.github {
+            background-color: #45e90988; /* GitHub dark color */
+        }
+        .button.github:hover {
+            background-color: #45e90988;
+        }
+        .button.github-profile {
+            background-color: #45e90988; /* GitHub green color */
+        }
+        .button.github-profile:hover {
+            background-color: #45e90988;
+        }
+        .underline-link {
+            text-decoration: underline;
+        }
+      </style>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    
+<div>
+    <h1 style="text-align: center;">Welcome to my professional portfolio, a centralized hub where you can access a comprehensive collection of my cybersecurity series, blogs and projects, expertly organized for your exploration and insight.</h1>
+</div>
+    <br>
+   <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f4f9; padding: 30px; border-radius: 10px; max-width: 800px; margin: auto; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+   <p style="text-align: center;"><img src="https://komarev.com/ghpvc/?username=offensive-panda&label=Profile%20views&color=0e75b6&style=flat" alt="Profile views" /></p>
+   <h2 style="color: #2c3e50; text-align: center; font-size: 28px; margin-bottom: 20px;">Usman Sikander (a.k.a Offensive-Panda)</h2>
+    <p style="color: #2980b9; text-align: center; font-size: 18px;">
+        <strong>Offensive Security Researcher @ <a href="https://www.cytomate.net" style="color: #3498db; text-decoration: none;">Cytomate</a></strong>
+    </p>
+    <ul style="list-style-type: none; padding: 0; margin-top: 20px; color: #34495e; font-size: 16px; line-height: 1.8;">
+        <li style="margin-bottom: 15px;">
+            <span style="font-size: 24px; color: #e74c3c;">☠️</span> 
+            <strong>An InfoSec Enthusiast:</strong> constantly seeking knowledge. I enjoy the Purple 💜 but more in love with Red ❤️.
+        </li>
+        <li style="margin-bottom: 15px;">
+            <span style="font-size: 24px; color: #f39c12;">🔭</span> 
+            <strong>Currently Focused On:</strong> Adversary Emulation, Red Teaming, Malware Development, and Breach & Attack Simulation.
+        </li>
+        <li style="margin-bottom: 15px;">
+            <span style="font-size: 24px; color: #16a085;">🤝</span> 
+            <strong>Passionate About:</strong> Adversary Emulation, Security Controls Validation, Red Team Operations, and Proactive Threat Hunting.
+        </li>
+        <li style="margin-bottom: 15px;">
+            <span style="font-size: 24px; color: #2ecc71;">⚡</span> 
+            <strong>Fun Fact:</strong> I believe I am funny!
+        </li>
+        <li style="margin-bottom: 15px;">
+            <span style="font-size: 24px; color: #9b59b6;">📝</span> 
+            <strong>Articles and Research:</strong> I regularly write on <strong>Medium</strong></a>.
+        </li>
+    </ul>
+
+  <div style="text-align: center; margin-top: 30px;">
+    <a href="https://medium.com/@merasor07" style="
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #3498db;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 5px;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+    " onmouseover="this.style.backgroundColor='#2980b9'" onmouseout="this.style.backgroundColor='#3498db'">
+        <B>Explore My Articles</B>
+    </a>
+</div>
+
+</div>
+  <h2 style="text-align: center; font-size: 36px; font-weight: bold; margin-bottom: 40px;">Cybersecurity series</h2>
+        <div style="display: flex; justify-content: center; gap: 20px; margin-top: 20px;">
+            <div style="text-align: center;">
+                <h3 style="margin-bottom: 10px;">Defense Evasion Series</h3>
+                <img src="DE.gif" alt="GIF 1" style="width: 400px; height: auto;">
+            </div>
+            <div style="text-align: center;">
+                <h3 style="margin-bottom: 10px;">Malware Analysis Series</h3>
+                <img src="ME.gif" alt="GIF 2" style="width: 400px; height: auto;">
+            </div>
+            <div style="text-align: center;">
+                <h3 style="margin-bottom: 10px;">Process Injection Series</h3>
+                <img src="PE.gif" alt="GIF 3" style="width: 400px; height: auto;">
+            </div>
+        </div>
+<br>
+<div class="project-table" style="width: 100%; max-width: 1000px; margin: 0 auto; background-color: #ffffff; border-radius: 10px; box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); overflow: hidden;">
+    <table style="width: 100%; border-collapse: collapse; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+        <thead style="background-color: #34495e; color: white;">
+            <tr>
+                <th style="padding: 20px 15px; text-align: left; font-size: 20px;">Series (GitHub Pages)</th>
+                <th style="padding: 20px 15px; text-align: left; font-size: 20px;">Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr style="transition: background-color 0.3s ease;">
+                <td style="padding: 20px; font-size: 18px;">
+                    <a href="https://offensive-panda.github.io/DefenseEvasionTechniques" style="color: #3498db; text-decoration: none; font-weight: bold;">Advanced Evasion Techniques</a>
+                </td>
+                <td style="padding: 20px; font-size: 16px; color: #2c3e50;">
+                    This comprehensive repository is designed for cybersecurity enthusiasts, researchers, and professionals looking to enhance their skills in malware development, offensive security, and advanced security defenses.
+                </td>
+            </tr>
+            <tr style="background-color: #f7f7f7; transition: background-color 0.3s ease;">
+                <td style="padding: 20px; font-size: 18px;">
+                    <a href="https://offensive-panda.github.io/MalwareAnalysis" style="color: #3498db; text-decoration: none; font-weight: bold;">Malware Analysis</a>
+                </td>
+                <td style="padding: 20px; font-size: 16px; color: #2c3e50;">
+                    This central repository offers valuable resources for professionals and researchers focused on analyzing and understanding different types of malware, helping to advance malware research skills.
+                </td>
+            </tr>
+            <tr style="transition: background-color 0.3s ease;">
+                <td style="padding: 20px; font-size: 18px;">
+                    <a href="https://offensive-panda.github.io/ProcessInjectionTechniques" style="color: #3498db; text-decoration: none; font-weight: bold;">Process Injection Techniques</a>
+                </td>
+                <td style="padding: 20px; font-size: 16px; color: #2c3e50;">
+                    This series explores various process injection techniques used by adversaries, offering in-depth knowledge for those seeking expertise in offensive security techniques and strategies.
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Additional CSS for styling -->
+<style>
+    .project-table table tbody tr:hover {
+        background-color: #eaf2f8; /* Light hover effect on rows */
+    }
+
+    .project-table table a {
+        transition: color 0.3s ease; /* Smooth transition for link hover */
+    }
+
+    .project-table table a:hover {
+        color: #2980b9; /* Slightly darker blue for hover effect */
+    }
+
+    .project-table table th, .project-table table td {
+        border-bottom: 1px solid #ddd; /* Add table row borders for better separation */
+    }
+
+    .project-table table th:last-child, .project-table table td:last-child {
+        border-right: none;
+    }
+
+    .project-table table th:first-child, .project-table table td:first-child {
+        border-left: none;
+    }
+
+    .project-table table th, .project-table table td {
+        border-left: 1px solid #ddd;
+        border-right: 1px solid #ddd;
+    }
+</style>
+       <br>
+    <h2 style="text-align: center; font-size: 36px; font-weight: bold; margin-bottom: 40px;">Pinned projects</h2>
+
+    <div class="container">
+        <!-- Card 1 -->
+        <a href="https://github.com/Offensive-Panda/RWX_MEMEORY_HUNT_AND_INJECTION_DV" class="card-link">
+        <div class="card">
+            <div class="badge">Public</div>
+            <div class="card-title">RWX MEMORY HUNT AND INJECTION DV</div>
+            <div class="card-description">
+            Abusing Windows fork API and OneDrive.exe process to inject the malicious shellcode without allocating new RWX memory region. This technique is finding RWX region in already running processes in this case OneDrive.exe and Write shellcode into that region and execute it without calling VirtualProtect, VirtualAllocEx, VirtualAlloc.
+            </div>
+            <div class="meta">
+                <div class="stats">
+                    <span><i class="fas fa-code-branch"></i> <span id="rwx-forks"></span></span>
+                    <span><i class="fas fa-star"></i> <span id="rwx-stars"></span></span>
+                </div>
+                <div class="language">
+                    🔴 C++
+                </div>
+            </div>
+        </div>
+        </a>
+        <!-- Card 2 -->
+        <a href="https://github.com/Offensive-Panda/DV_NEW" class="card-link">
+        <div class="card">
+            <div class="badge">Public</div>
+            <div class="card-title">Dirty Vanity New (DV_NEW)</div>
+            <div class="card-description">
+                This is the combination of multiple evasion techniques. It is using direct syscalls to bypass user-mode EDR hooking and also to avoid static detection of syscalls instruction in stub I am using egg hunt technique. Egg hunt will place random bytes using DB instruction in syscall stub in the place of syscalls instructions and on run time it patch again those bytes with syscall instruction to transit into kernel.
+            </div>
+            <div class="meta">
+                <div class="stats">
+                    <span><i class="fas fa-code-branch"></i> <span id="repo2-forks"></span></span>
+                    <span><i class="fas fa-star"></i> <span id="repo2-stars"></span></span>
+                </div>
+                <div class="language">
+                    🔴 C++
+                    🟢 C
+                    🟡 Assembly 
+                </div>
+            </div>
+        </div>
+        </a>
+        <!-- Card 3 -->
+        <a href="https://github.com/Offensive-Panda/D3MPSEC" class="card-link">
+        <div class="card">
+            <div class="badge">Public</div>
+            <div class="card-title">Lsass Memory Dumping (D3MPSEC)</div>
+            <div class="card-description">
+                "D3MPSEC" is a memory dumping tool designed to extract memory dump from Lsass process using various techniques, including direct system calls, randomized procedures, and prototype name obfuscation. Its primary purpose is to bypass both static and dynamic analysis techniques commonly employed by security measures.
+            </div>
+            <div class="meta">
+                <div class="stats">
+                    <span><i class="fas fa-code-branch"></i> <span id="repo3-forks"></span></span>
+                    <span><i class="fas fa-star"></i> <span id="repo3-stars"></span></span>
+                </div>
+                <div class="language">
+                    🔴 C++
+                    🟢 C
+                    🟡 Assembly 
+                </div>
+            </div>
+        </div>
+        </a>
+        <!-- Card 4 -->
+        <a href="https://github.com/Offensive-Panda/LsassReflectDumping" class="card-link">
+        <div class="card">
+            <div class="badge">Public</div>
+            <div class="card-title">Lsass Reflect Dumping</div>
+            <div class="card-description">
+                This tool leverages the Process Forking technique using the RtlCreateProcessReflection API to clone the lsass.exe process. Once the clone is created, it utilizes MINIDUMP_CALLBACK_INFORMATION callbacks to generate a memory dump of the cloned process. Mimikatz and Pypykatz can be used offline to parse and extract the hashes.
+            </div>
+            <div class="meta">
+                <div class="stats">
+                    <span><i class="fas fa-code-branch"></i> <span id="repo4-forks"></span></span>
+                    <span><i class="fas fa-star"></i> <span id="repo4-stars"></span></span>
+                </div>
+                <div class="language">
+                    🔴 C++
+                </div>
+            </div>
+        </div>
+        </a>
+        <!-- Card 5 -->
+        <a href="https://github.com/Offensive-Panda/DefenseEvasionTechniques" class="card-link">
+        <div class="card">
+            <div class="badge">Public</div>
+            <div class="card-title">Defense Evasion Techniques</div>
+            <div class="card-description">
+                This comprehensive and central repository is designed for cybersecurity enthusiasts, researchers, and professionals seeking to stay ahead in the field. It provides a valuable resource for those dedicated to improving their skills in malware development, offensive security, and security defenses.
+            </div>
+            <div class="meta">
+                <div class="stats">
+                    <span><i class="fas fa-code-branch"></i> <span id="repo5-forks"></span></span>
+                    <span><i class="fas fa-star"></i> <span id="repo5-stars"></span></span>
+                </div>
+                <div class="language">
+                    🔴 C++
+                    🟢 C
+                    🟡 Assembly 
+                    🟣 Batch
+                    🟠 C#
+                </div>
+            </div>
+        </div>
+        </a>
+        <!-- Card 6 -->
+        <a href="https://github.com/Offensive-Panda/ProcessInjectionTechniques" class="card-link">
+        <div class="card">
+            <div class="badge">Public</div>
+            <div class="card-title">Process Injection Techniques</div>
+            <div class="card-description">
+                This comprehensive process injection series is crafted for cybersecurity enthusiasts, researchers, and professionals who aim to stay at the forefront of the field. It serves as a central repository of knowledge, offering in-depth exploration of various process injection techniques used by adversaries.
+            </div>
+            <div class="meta">
+                <div class="stats">
+                    <span><i class="fas fa-code-branch"></i> <span id="repo6-forks"></span></span>
+                    <span><i class="fas fa-star"></i> <span id="repo6-stars"></span></span>
+                </div>
+                <div class="language">
+                    🔴 C++
+                    🟢 C
+                    🟡 Assembly 
+                    🟣 Batch
+                </div>
+            </div>
+        </div>
+        </a>
+         <!-- Card 7 -->
+         <a href="https://github.com/Offensive-Panda/NT-AUTHORITY-SYSTEM-CONTEXT-RTCORE" class="card-link">
+         <div class="card">
+            <div class="badge">Public</div>
+            <div class="card-title">NT-AUTHORITY-SYSTEM-CONTEXT-RTCORE</div>
+            <div class="card-description">
+                This exploit rebuilds and exploit the CVE-2019-16098 which is in driver Micro-Star MSI Afterburner 4.6.2.15658 (aka RTCore64.sys and RTCore32.sys) allows any authenticated user to read and write to arbitrary memory, I/O ports, and MSRs. Instead of hardcoded base address of Ntoskrnl.exe, I calculated it dynamically and recalculated all offsets for new version of windows.
+            </div>
+            <div class="meta">
+                <div class="stats">
+                    <span><i class="fas fa-code-branch"></i> <span id="repo6-forks"></span></span>
+                    <span><i class="fas fa-star"></i> <span id="repo6-stars"></span></span>
+                </div>
+                <div class="language">
+                    🔴 C++
+                </div>
+            </div>
+        </div>
+        </a>
+         <!-- Card 8 -->
+         <a href="https://github.com/Offensive-Panda/WPM-MAJIC-ENTRY-POINT-INJECTION" class="card-link">
+         <div class="card">
+            <div class="badge">Public</div>
+            <div class="card-title">WPM-MAJIC-ENTRY-POINT-INJECTION</div>
+            <div class="card-description">
+                This exploit is utilising AddressOfEntryPoint of process which is RX and using WriteProcessMemory internal magic to change the permission and write the shellcode. Exploit also using direct syscalls to bypass user-mode hooking of AV/EDRs. This technique is avoiding the usage of VirtualAlloc, VirtualProtect APIs directly inside the code. The working of VirtualProtect will be covered by WPM magic.
+            </div>
+            <div class="meta">
+                <div class="stats">
+                    <span><i class="fas fa-code-branch"></i> <span id="repo6-forks"></span></span>
+                    <span><i class="fas fa-star"></i> <span id="repo6-stars"></span></span>
+                </div>
+                <div class="language">
+                    🔴 C++
+                    🟢 C
+                    🟡 Assembly 
+                </div>
+            </div>
+        </div>
+        </a>
+         <!-- Card 9 -->
+         <a href="https://github.com/Offensive-Panda/.NET_PROFILER_DLL_LOADING" class="card-link">
+         <div class="card">
+            <div class="badge">Public</div>
+            <div class="card-title">.NET_PROFILER_DLL_LOADING</div>
+            <div class="card-description">
+                .NET profiler DLL loading can be abused to make a legit .NET application load a malicious DLL using environment variables. This exploit is loading a malicious DLL using Task Scheduler (MMC) to bypass UAC and getting admin privileges.
+            </div>
+            <div class="meta">
+                <div class="stats">
+                    <span><i class="fas fa-code-branch"></i> <span id="repo6-forks"></span></span>
+                    <span><i class="fas fa-star"></i> <span id="repo6-stars"></span></span>
+                </div>
+                <div class="language">
+                    🔴 C++
+                    🟢 C
+                </div>
+            </div>
+        </div>
+        </a>
+         <!-- Card 10 -->
+         <a href="https://github.com/Offensive-Panda/PEB_WALK_AND_API_OBFUSCATION_INJECTION" class="card-link">
+         <div class="card">
+            <div class="badge">Public</div>
+            <div class="card-title">PEB_WALK_AND_API_OBFUSCATION_INJECTION</div>
+            <div class="card-description">
+                This exploit use PEB walk technique to resolve API calls dynamically and obfuscate all API calls to perform process injection. These technqies will help to bypass static analysis of AV/EDR solutions.
+            </div>
+            <div class="meta">
+                <div class="stats">
+                    <span><i class="fas fa-code-branch"></i> <span id="repo6-forks"></span></span>
+                    <span><i class="fas fa-star"></i> <span id="repo6-stars"></span></span>
+                </div>
+                <div class="language">
+                    🔴 C++
+                </div>
+            </div>
+        </div>
+        </a>
+         <!-- Card 11 -->
+         <a href="https://github.com/Offensive-Panda/Collect_Threat_Intel_AND_Malware_Using_Honeypots" class="card-link">
+         <div class="card">
+            <div class="badge">Public</div>
+            <div class="card-title">Collect_Threat_Intel_AND_Malware_Using_Honeypots</div>
+            <div class="card-description">
+                This code run as a service and monitoring all sysmon event logs and take action based on events generated by attacker's activities. Upload all dropped and created malwares, files on server for further analysis. This captures all commands executed by attacker on a system. This can be deployed in production as well in high-interaction honeypot systems to monitor attack activities.
+            </div>
+            <div class="meta">
+                <div class="stats">
+                    <span><i class="fas fa-code-branch"></i> <span id="repo6-forks"></span></span>
+                    <span><i class="fas fa-star"></i> <span id="repo6-stars"></span></span>
+                </div>
+                <div class="language">
+                    🟠 C#
+                </div>
+            </div>
+        </div>
+        </a>
+         <!-- Card 12 -->
+         <a href="https://github.com/Offensive-Panda/MalwareAnalysis" class="card-link">
+         <div class="card">
+            <div class="badge">Public</div>
+            <div class="card-title">Malware Analysis</div>
+            <div class="card-description">
+                This central repository is crafted for cybersecurity enthusiasts, researchers, and professionals aiming to advance their skills. It offers valuable resources for those focused on analyzing and understanding different types of malware.
+            </div>
+            <div class="meta">
+                <div class="stats">
+                    <span><i class="fas fa-code-branch"></i> <span id="repo6-forks"></span></span>
+                    <span><i class="fas fa-star"></i> <span id="repo6-stars"></span></span>
+                </div>
+                <div class="language">
+                    🔴 C++
+                    🟢 C
+                    🟡 Assembly 
+                    🟣 Batch
+                    🟠 C#
+                </div>
+            </div>
+        </div>
+        </a>
+    </div>
+
+    <div class="pagination">
+        <button id="back" class="back disabled">Back</button>
+        <button id="next" class="next">Next</button>
+    </div>
+
+       <br>
+    <h2 style="text-align: center; font-size: 36px; font-weight: bold; margin-bottom: 40px;">GitHub stats</h2>
+<div style="display: flex; justify-content: space-between;">
+    <img src="https://github-readme-stats.vercel.app/api/top-langs?username=offensive-panda&show_icons=true&locale=en&layout=compact" alt="Top Languages" style="flex: 1; margin-right: 25px;"  width="250" height="250" />
+    <img src="https://github-readme-stats.vercel.app/api?username=offensive-panda&show_icons=true&locale=en" alt="GitHub Stats" style="flex: 1; margin-left: 25px;" width="250" height="250" />
+</div>
+   <br>
+        <h2 style="text-align: center; font-size: 36px; font-weight: bold; margin-bottom: 40px;">Connect with me</h2>
+    <p class="social-icons" style="text-align: center;">
+        Twitter<a href="https://twitter.com/usmansikander13" target="_blank"><img src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/twitter.svg" alt="Twitter" height="30" width="40" /></a>
+        LinkedIn<a href="https://linkedin.com/in/usman-sikander13" target="_blank"><img src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="LinkedIn" height="30" width="40" /></a>
+        Medium<a href="https://medium.com/@merasor07" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111505.png" alt="Medium" height="30" width="40" /></a>
+    </p>
+   <br>
+       <h2 style="text-align: center; font-size: 36px; font-weight: bold; margin-bottom: 40px;">Languages and tools</h2>
+    <p class="languages" style="text-align: center;">
+        <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/c/c-original.svg" alt="C" width="40" height="40"/>
+        <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/cplusplus/cplusplus-original.svg" alt="C++" width="40" height="40"/>
+        <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/csharp/csharp-original.svg" alt="C#" width="40" height="40"/>
+        <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original-wordmark.svg" alt="CSS3" width="40" height="40"/>
+        <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original-wordmark.svg" alt="HTML5" width="40" height="40"/>
+        <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" alt="Python" width="40" height="40"/>
+    </p>
+    
+    <script>
+        const cards = document.querySelectorAll('.card');
+        const numCards = cards.length;
+        const cardsPerPage = 6;
+        let currentPage = 0;
+
+        function updatePagination() {
+            document.getElementById('back').classList.toggle('disabled', currentPage === 0);
+            document.getElementById('next').classList.toggle('disabled', (currentPage + 1) * cardsPerPage >= numCards);
+        }
+
+        function showPage(page) {
+            const start = page * cardsPerPage;
+            const end = Math.min(start + cardsPerPage, numCards);
+            cards.forEach((card, index) => {
+                card.style.display = (index >= start && index < end) ? 'block' : 'none';
+            });
+            updatePagination();
+        }
+
+        document.getElementById('next').addEventListener('click', () => {
+            if ((currentPage + 1) * cardsPerPage < numCards) {
+                currentPage++;
+                showPage(currentPage);
+            }
+        });
+
+        document.getElementById('back').addEventListener('click', () => {
+            if (currentPage > 0) {
+                currentPage--;
+                showPage(currentPage);
+            }
+        });
+
+        showPage(currentPage);
+    </script>
+</body>
+</html>
