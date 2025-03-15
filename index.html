@@ -283,20 +283,31 @@ layout: default
 </li>
     </ul>
 
-  <div style="text-align: center; margin-top: 30px;">
+<!-- Font Awesome CDN for icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+<div style="text-align: center; margin-top: 30px;">
     <a href="https://medium.com/@merasor07" style="
-        display: inline-block;
-        padding: 10px 20px;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 24px;
         background-color: #3498db;
         color: #fff;
         text-decoration: none;
-        border-radius: 5px;
+        border-radius: 30px;
         font-size: 16px;
-        transition: background-color 0.3s ease;
-    " onmouseover="this.style.backgroundColor='#2980b9'" onmouseout="this.style.backgroundColor='#3498db'">
-        <B>Explore My Articles</B>
+        font-weight: bold;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    " 
+    onmouseover="this.style.backgroundColor='#2980b9'; this.style.transform='scale(1.05)'" 
+    onmouseout="this.style.backgroundColor='#3498db'; this.style.transform='scale(1)'">
+        <i class="fas fa-book-open"></i> <!-- Book Icon -->
+        Explore My Articles
     </a>
 </div>
+
 
 </div>
   <h2 style="text-align: center; font-size: 36px; font-weight: bold; margin-bottom: 40px;">Cybersecurity series</h2>
