@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Usman Sikander — Offensive Security Researcher</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red:#ff1a1a; --purple:#9b30ff; --cyan:#00ffe5; --gold:#ffd700;
+    --bg:#060608; --bg2:#0c0d11; --bg3:#111318;
+    --border:rgba(255,26,26,0.18);
+    --text:#c8ccd8; --text-muted:#5a5e72;
+    --mono:'Share Tech Mono',monospace;
+    --display:'Orbitron',sans-serif;
+    --body:'Rajdhani',sans-serif;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--text);font-family:var(--body);font-size:16px;line-height:1.6;overflow-x:hidden}
+  body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.055) 2px,rgba(0,0,0,0.055) 4px);pointer-events:none;z-index:9999}
+
+  /* NAV */
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:13px 5%;background:rgba(6,6,8,0.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
+  .nav-logo{font-family:var(--display);font-size:0.78rem;font-weight:900;color:var(--red);letter-spacing:3px;text-decoration:none}
+  .nav-links{display:flex;gap:26px;list-style:none}
+  .nav-links a{font-family:var(--mono);font-size:0.7rem;color:var(--text-muted);text-decoration:none;letter-spacing:2px;text-transform:uppercase;transition:color .2s}
+  .nav-links a:hover{color:var(--cyan)}
+
+  /* HERO */
+  .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:80px 6% 55px;position:relative;overflow:hidden}
+  .hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,26,26,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,26,26,0.04) 1px,transparent 1px);background-size:55px 55px;mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 0%,transparent 100%)}
+  .hero-glow{position:absolute;top:-150px;right:-150px;width:600px;height:600px;background:radial-gradient(circle,rgba(255,26,26,0.1) 0%,transparent 70%);pointer-events:none}
+  .hero-glow2{position:absolute;bottom:-200px;left:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(155,48,255,0.07) 0%,transparent 70%);pointer-events:none}
+  .hero-content{display:grid;grid-template-columns:1fr;gap:40px;align-items:center;position:relative;z-index:1;max-width:700px;width:100%;min-width:0}
+  .hero-left{min-width:0}
+  .hero-label{font-family:var(--mono);font-size:0.7rem;color:var(--red);letter-spacing:4px;text-transform:uppercase;margin-bottom:14px;opacity:0;animation:fadeUp .7s .2s forwards}
+  .hero-label::before{content:'▶ '}
+  .hero-name{font-family:var(--display);font-size:clamp(2.4rem,6vw,5.5rem);font-weight:900;line-height:.95;letter-spacing:-2px;margin-bottom:14px;opacity:0;animation:fadeUp .7s .35s forwards}
+  .hero-name .red{color:var(--red)}
+  .hero-name .outline{color:transparent;-webkit-text-stroke:1px rgba(255,26,26,0.35);display:block}
+  .hero-title{font-family:var(--mono);font-size:.76rem;color:var(--cyan);letter-spacing:2px;margin-bottom:18px;opacity:0;animation:fadeUp .7s .5s forwards}
+  .hero-desc{max-width:520px;width:100%;font-size:.98rem;color:var(--text-muted);line-height:1.65;margin-bottom:26px;opacity:0;animation:fadeUp .7s .62s forwards;white-space:normal;overflow-wrap:break-word;word-break:break-word}
+  .hero-actions{display:flex;gap:12px;flex-wrap:wrap;opacity:0;animation:fadeUp .7s .75s forwards}
+  .hero-right{display:flex;flex-direction:column;gap:10px;opacity:0;animation:fadeIn 1s 1s forwards}
+  .stat-badge{background:var(--bg3);border:1px solid var(--border);padding:13px 18px;display:flex;align-items:center;gap:13px;clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));min-width:175px}
+  .stat-badge-icon{flex-shrink:0}
+  .stat-badge-val{font-family:var(--display);font-size:1.25rem;font-weight:700;color:#fff;line-height:1}
+  .stat-badge-lbl{font-family:var(--mono);font-size:0.6rem;color:var(--text-muted);letter-spacing:1px;margin-top:2px}
+
+  /* BUTTONS */
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:11px 24px;font-family:var(--mono);font-size:.76rem;letter-spacing:2px;text-transform:uppercase;text-decoration:none;transition:all .22s;cursor:pointer;border:none;clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px))}
+  .btn-primary{background:var(--red);color:#fff}
+  .btn-primary:hover{background:#ff4040;transform:translateY(-2px);box-shadow:0 8px 28px rgba(255,26,26,.4)}
+  .btn-ghost{background:transparent;color:var(--text);border:1px solid var(--border)}
+  .btn-ghost:hover{border-color:var(--cyan);color:var(--cyan);transform:translateY(-2px)}
+
+  /* SECTIONS */
+  section{padding:65px 6%}
+  .sec-tag{font-family:var(--mono);font-size:.68rem;color:var(--red);letter-spacing:4px;text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:10px}
+  .sec-tag::after{content:'';width:40px;height:1px;background:var(--red);opacity:.4}
+  .sec-title{font-family:var(--display);font-size:clamp(1.4rem,3vw,2.2rem);font-weight:700;letter-spacing:-.5px;margin-bottom:32px;line-height:1.1}
+
+  /* ABOUT */
+  .about{background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+  .focus-list{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+  .focus-item{display:flex;gap:10px;padding:10px 14px;background:var(--bg3);border:1px solid var(--border);border-left:3px solid var(--red);font-size:.85rem;transition:all .2s;align-items:center}
+  .focus-item:hover{border-left-color:var(--cyan);transform:translateX(3px)}
+  .focus-icon{flex-shrink:0;display:flex;align-items:center}
+  .divider{width:44px;height:2px;background:linear-gradient(to right,var(--red),transparent);margin:10px 0 18px}
+  .cert-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}
+  .cert-badge{padding:9px 11px;background:var(--bg3);border:1px solid var(--border);transition:all .2s;clip-path:polygon(0 0,calc(100% - 6px) 0,100% 6px,100% 100%,6px 100%,0 calc(100% - 6px))}
+  .cert-badge:hover{border-color:var(--purple);background:rgba(155,48,255,.07)}
+  .cert-id{font-family:var(--display);font-size:.65rem;font-weight:700;color:var(--purple);letter-spacing:1px}
+  .cert-name{font-family:var(--mono);font-size:.58rem;color:var(--text-muted);line-height:1.3;margin-top:2px}
+  .support-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+  .support-btn{display:inline-flex;align-items:center;gap:6px;padding:7px 14px;background:var(--bg3);border:1px solid var(--border);color:var(--text-muted);text-decoration:none;font-family:var(--mono);font-size:.68rem;letter-spacing:1px;transition:all .2s;clip-path:polygon(0 0,calc(100% - 6px) 0,100% 6px,100% 100%,6px 100%,0 calc(100% - 6px))}
+  .support-btn:hover{border-color:#ffd700;color:#ffd700}
+
+  /* SERIES */
+  .series-section{background:var(--bg)}
+  .series-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .series-card{background:var(--bg3);border:1px solid var(--border);overflow:hidden;text-decoration:none;color:inherit;display:flex;flex-direction:column;transition:border-color .25s,transform .25s,box-shadow .25s;clip-path:polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,14px 100%,0 calc(100% - 14px))}
+  .series-card:hover{border-color:var(--red);transform:translateY(-4px);box-shadow:0 14px 40px rgba(255,26,26,.18)}
+  /* Image wrapper — real GIF on top, SVG fallback behind */
+  .series-img-wrap{position:relative;height:170px;overflow:hidden;background:var(--bg)}
+  .series-bg-art{position:absolute;inset:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center}
+  .series-gif{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.55) brightness(.6);transition:filter .4s,transform .4s;z-index:1}
+  .series-card:hover .series-gif{filter:saturate(.9) brightness(.45);transform:scale(1.06)}
+  .series-badge{position:absolute;bottom:0;left:0;right:0;height:60%;background:linear-gradient(to top,rgba(6,6,8,.95) 0%,transparent 100%);z-index:2}
+  .series-icon-box{position:absolute;top:12px;left:12px;width:40px;height:40px;background:rgba(6,6,8,.88);border:1px solid var(--red);display:flex;align-items:center;justify-content:center;clip-path:polygon(0 0,calc(100% - 5px) 0,100% 5px,100% 100%,5px 100%,0 calc(100% - 5px));z-index:3}
+  .series-num{position:absolute;top:12px;right:12px;font-family:var(--display);font-size:.58rem;font-weight:700;color:rgba(255,26,26,.75);letter-spacing:2px;background:rgba(6,6,8,.8);padding:3px 7px;border:1px solid rgba(255,26,26,.2);z-index:3}
+  .series-body{padding:14px 16px 18px;flex:1;display:flex;flex-direction:column}
+  .series-label{font-family:var(--mono);font-size:.6rem;color:var(--red);letter-spacing:3px;text-transform:uppercase;margin-bottom:5px}
+  .series-title{font-family:var(--display);font-size:.84rem;font-weight:700;color:#fff;margin-bottom:7px;line-height:1.25}
+  .series-desc{font-size:.8rem;color:var(--text-muted);line-height:1.55;flex:1}
+  .series-link{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:.65rem;color:var(--red);letter-spacing:1px;margin-top:10px;transition:gap .2s}
+  .series-card:hover .series-link{gap:10px}
+
+  /* PROJECTS */
+  .projects{background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+  .project-list{display:flex;flex-direction:column;gap:2px}
+  .project-item{display:grid;grid-template-columns:44px 1fr 24px;align-items:center;gap:16px;padding:14px 20px;background:var(--bg3);border:1px solid transparent;text-decoration:none;color:inherit;transition:all .2s;position:relative;overflow:hidden}
+  .project-item::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--red);transform:scaleY(0);transition:transform .25s}
+  .project-item:hover{border-color:var(--border);background:rgba(255,26,26,.04);transform:translateX(3px)}
+  .project-item:hover::before{transform:scaleY(1)}
+  .proj-icon{width:40px;height:40px;background:rgba(255,26,26,.07);border:1px solid rgba(255,26,26,.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;clip-path:polygon(0 0,calc(100% - 5px) 0,100% 5px,100% 100%,5px 100%,0 calc(100% - 5px))}
+  .project-name{font-family:var(--display);font-size:.8rem;font-weight:700;color:#fff;margin-bottom:3px;letter-spacing:.3px}
+  .project-desc{font-size:.8rem;color:var(--text-muted);line-height:1.4}
+  .project-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:5px}
+  .tag{font-family:var(--mono);font-size:.58rem;padding:2px 7px;border:1px solid var(--border);color:var(--text-muted);letter-spacing:1px}
+  .tag.cpp{border-color:rgba(255,26,26,.3);color:#ff6060}
+  .tag.c{border-color:rgba(0,255,229,.2);color:var(--cyan)}
+  .tag.asm{border-color:rgba(255,200,0,.2);color:#ffd700}
+  .tag.cs{border-color:rgba(155,48,255,.3);color:var(--purple)}
+  .proj-arrow{display:flex;align-items:center;gap:5px;color:var(--text-muted);font-family:var(--mono);font-size:.6rem;letter-spacing:1px;transition:color .2s,transform .2s;flex-shrink:0;white-space:nowrap}
+  .project-item:hover .proj-arrow{color:var(--red);transform:translateX(3px)}
+
+  /* STATS */
+  .stats-section{background:var(--bg)}
+  .gh-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px}
+  .gh-card{background:var(--bg3);border:1px solid var(--border);padding:18px 14px;display:flex;flex-direction:column;align-items:center;gap:7px;clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));transition:border-color .2s;text-align:center}
+  .gh-card:hover{border-color:var(--red)}
+  .gh-card-icon{display:flex;align-items:center;justify-content:center}
+  .gh-val{font-family:var(--display);font-size:1.7rem;font-weight:900;color:#fff;line-height:1}
+  .gh-lbl{font-family:var(--mono);font-size:.6rem;color:var(--text-muted);letter-spacing:2px;text-transform:uppercase}
+  .gh-sub{font-family:var(--mono);font-size:.57rem;color:rgba(255,26,26,.55)}
+  .lang-wrap{background:var(--bg3);border:1px solid var(--border);padding:18px 22px}
+  .lang-title{font-family:var(--mono);font-size:.65rem;color:var(--red);letter-spacing:3px;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+  .lang-bars{display:flex;flex-direction:column;gap:9px}
+  .lang-row{display:grid;grid-template-columns:88px 1fr 46px;align-items:center;gap:10px}
+  .lang-name{font-family:var(--mono);font-size:.7rem;color:var(--text);display:flex;align-items:center;gap:6px}
+  .lang-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+  .lang-track{height:5px;background:rgba(255,255,255,.05);overflow:hidden}
+  .lang-fill{height:100%;transition:width 1.3s cubic-bezier(.4,0,.2,1)}
+  .lang-pct{font-family:var(--mono);font-size:.62rem;color:var(--text-muted);text-align:right}
+
+  /* CONNECT */
+  .connect{background:var(--bg2);border-top:1px solid var(--border)}
+  .connect-inner{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+  .connect-headline{font-family:var(--display);font-size:clamp(1.7rem,3.2vw,2.8rem);font-weight:900;line-height:1.05;letter-spacing:-1px}
+  .connect-headline .red{color:var(--red)}
+  .connect-sub{margin-top:12px;color:var(--text-muted);font-size:.92rem;max-width:360px}
+  .social-list{display:flex;flex-direction:column;gap:7px}
+  .social-link{display:flex;align-items:center;gap:14px;padding:13px 18px;background:var(--bg3);border:1px solid var(--border);text-decoration:none;color:var(--text);transition:all .22s;clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px))}
+  .social-link:hover{border-color:var(--red);color:#fff;background:rgba(255,26,26,.06);transform:translateX(5px)}
+  .social-icon{width:32px;height:32px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .social-info{flex:1}
+  .social-platform{font-family:var(--display);font-size:.68rem;font-weight:700;letter-spacing:2px;color:var(--text-muted);text-transform:uppercase}
+  .social-handle{font-family:var(--mono);font-size:.77rem;color:#fff;margin-top:1px}
+  .social-arrow{color:var(--text-muted);transition:transform .2s,color .2s}
+  .social-link:hover .social-arrow{transform:translateX(4px);color:var(--red)}
+
+  /* FOOTER */
+  footer{border-top:1px solid var(--border);padding:20px 6%;display:flex;justify-content:space-between;align-items:center;background:var(--bg2)}
+  .footer-brand{font-family:var(--display);font-size:.7rem;font-weight:700;color:var(--red);letter-spacing:3px}
+  .footer-copy{font-family:var(--mono);font-size:.62rem;color:var(--text-muted);letter-spacing:1px}
+
+  /* CURSOR */
+  .cursor{display:inline-block;width:2px;height:.85em;background:var(--cyan);margin-left:3px;animation:blink 1s step-end infinite;vertical-align:middle}
+
+  /* GLITCH */
+  .glitch{position:relative}
+  .glitch::before,.glitch::after{content:attr(data-text);position:absolute;top:0;left:0;width:100%;height:100%;font-family:inherit;font-size:inherit;font-weight:inherit;line-height:inherit;letter-spacing:inherit}
+  .glitch::before{color:var(--red);animation:g1 5s infinite}
+  .glitch::after{color:var(--cyan);animation:g2 5s infinite}
+  @keyframes g1{0%,88%,100%{clip-path:none;transform:none;opacity:0}90%{clip-path:polygon(0 20%,100% 20%,100% 30%,0 30%);transform:translateX(-3px);opacity:.8}93%{clip-path:polygon(0 60%,100% 60%,100% 70%,0 70%);transform:translateX(3px);opacity:.8}95%{opacity:0}}
+  @keyframes g2{0%,91%,100%{clip-path:none;transform:none;opacity:0}93%{clip-path:polygon(0 40%,100% 40%,100% 50%,0 50%);transform:translateX(3px);opacity:.8}96%{clip-path:none;opacity:0}}
+
+  @keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+  @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+  @keyframes dash{to{stroke-dashoffset:0}}
+
+  /* SVG art animations */
+  .pulse-ring{animation:pulseRing 2s ease-in-out infinite}
+  @keyframes pulseRing{0%,100%{opacity:.2;r:28}50%{opacity:.5;r:32}}
+  .scan-line{animation:scanLine 3s linear infinite}
+  @keyframes scanLine{0%{transform:translateY(-100%)}100%{transform:translateY(600%)}}
+  .blink-dot{animation:blinkDot 1.2s step-end infinite}
+  @keyframes blinkDot{0%,100%{opacity:1}50%{opacity:0}}
+  .rotate-slow{animation:rotateSlow 12s linear infinite;transform-origin:center}
+  @keyframes rotateSlow{to{transform:rotate(360deg)}}
+  .data-flow{animation:dataFlow 2.5s linear infinite}
+  @keyframes dataFlow{0%{stroke-dashoffset:40}100%{stroke-dashoffset:0}}
+
+
+  /* ── HERO TERMINAL ── */
+  .hero-terminal{margin-top:28px;background:#0a0b0e;border:1px solid rgba(255,26,26,0.25);max-width:620px;width:100%;opacity:0;animation:fadeUp .7s 1s forwards}
+  .term-bar{display:flex;align-items:center;gap:10px;padding:8px 14px;background:#0e0f13;border-bottom:1px solid rgba(255,26,26,0.12)}
+  .term-dots{display:flex;gap:5px}
+  .term-dot{width:10px;height:10px;border-radius:50%;display:block}
+  .term-title{font-family:var(--mono);font-size:.65rem;color:var(--text-muted);letter-spacing:1px;flex:1;text-align:center}
+  .term-status{display:flex;align-items:center;gap:5px;font-family:var(--mono);font-size:.6rem;color:rgba(255,26,26,0.7);letter-spacing:2px}
+  .term-live{width:6px;height:6px;border-radius:50%;background:#ff1a1a;animation:blink 1s step-end infinite}
+  .term-body{padding:14px 16px;min-height:110px;font-family:var(--mono);font-size:.72rem;line-height:1.8;color:#c8ccd8;overflow:hidden;word-break:break-word;overflow-wrap:break-word}
+  .term-line{display:flex;gap:8px;align-items:flex-start;flex-wrap:wrap}
+  .term-cmd{color:#fff;word-break:break-word;overflow-wrap:break-word}
+  .term-prompt{color:#ff1a1a;flex-shrink:0}
+  .term-out{color:var(--text-muted);padding-left:16px;word-break:break-word;overflow-wrap:break-word}
+  .term-out.ok{color:#28c840}
+  .term-out.warn{color:#febc2e}
+  .term-out.hi{color:#00ffe5}
+  .term-caret{display:inline-block;width:7px;height:.8em;background:#ff1a1a;animation:blink 1s step-end infinite;vertical-align:middle;margin-left:2px}
+
+  /* ── MITRE TICKER ── */
+  .mitre-ticker{display:flex;align-items:center;gap:0;margin-top:14px;max-width:620px;width:100%;overflow:hidden;border:1px solid rgba(255,26,26,0.15);opacity:0;animation:fadeUp .7s 1.15s forwards}
+  .mitre-label{font-family:var(--mono);font-size:.6rem;color:#ff1a1a;letter-spacing:2px;white-space:nowrap;padding:7px 12px;background:rgba(255,26,26,0.1);border-right:1px solid rgba(255,26,26,0.2);display:flex;align-items:center;gap:5px;flex-shrink:0}
+  .mitre-track{flex:1;min-width:0;overflow:hidden;padding:7px 0}
+  .mitre-inner{display:flex;gap:0;white-space:nowrap;animation:tickerScroll 28s linear infinite}
+  .mitre-inner span{font-family:var(--mono);font-size:.62rem;color:var(--text-muted);padding:0 20px;border-right:1px solid rgba(255,26,26,0.1);flex-shrink:0;transition:color .2s}
+  .mitre-inner span:hover{color:#ff1a1a}
+  @keyframes tickerScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+
+  .reveal{opacity:0;transform:translateY(16px);transition:opacity .5s,transform .5s}
+  .reveal.visible{opacity:1;transform:none}
+
+  /* RESPONSIVE */
+  @media(max-width:1050px){.gh-grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:900px){
+    .hero-content,.about-grid,.connect-inner{grid-template-columns:1fr}
+    .hero-right{flex-direction:row;flex-wrap:wrap}
+    .series-grid{grid-template-columns:1fr}
+    .cert-grid{grid-template-columns:repeat(2,1fr)}
+    .focus-list{grid-template-columns:1fr}
+    .nav-links{display:none}
+    footer{flex-direction:column;gap:8px;text-align:center}
+  }
+  @media(max-width:600px){
+    .hero{padding:78px 5% 48px}
+    section{padding:48px 5%}
+    .gh-grid{grid-template-columns:repeat(2,1fr)}
+    .project-item{grid-template-columns:40px 1fr}
+    .proj-arrow{display:none}
+    .hero-terminal{margin-top:22px}
+    .term-bar{padding:6px 10px;gap:7px}
+    .term-title{font-size:.55rem}
+    .term-status{font-size:.52rem}
+    .term-body{padding:10px 11px;min-height:90px;font-size:.62rem;line-height:1.65}
+    .term-out{padding-left:10px}
+    .mitre-ticker{margin-top:11px}
+    .mitre-label{font-size:.52rem;padding:6px 8px;letter-spacing:1px}
+    .mitre-inner span{font-size:.55rem;padding:0 13px}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">OFF_PANDA</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#series">Series</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#stats">Stats</a></li>
+    <li><a href="#connect">Connect</a></li>
+  </ul>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero" id="home">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="hero-content">
+    <div class="hero-left">
+      <div class="hero-label">Offensive Security Researcher</div>
+      <h1 class="hero-name glitch" data-text="USMAN SIKANDER">
+        <span class="red">USMAN</span>
+        <span class="outline">SIKANDER</span>
+      </h1>
+      <p class="hero-title">ADVERSARY EMULATION &nbsp;·&nbsp; RED TEAMING &nbsp;·&nbsp; MALWARE DEV<span class="cursor"></span></p>
+      <p class="hero-desc">InfoSec enthusiast — living in the purple 💜 but in love with red ❤️. Crafting offensive tools, validating modern defenses, and emulating real-world adversaries techniques, redteaming, malware development with precision.</p>
+      <div class="hero-actions">
+        <a href="https://medium.com/@merasor07" target="_blank" class="btn btn-primary">
+          <!-- skull SVG -->
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="10" r="7"/><path d="M9 17v3h6v-3"/><path d="M9 13h.01M15 13h.01"/></svg>
+          Read Articles
+        </a>
+        <a href="#projects" class="btn btn-ghost">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          View Projects
+        </a>
+      </div>
+
+      <!-- ── TERMINAL WIDGET ── -->
+      <div class="hero-terminal" id="hero-terminal">
+        <div class="term-bar">
+          <div class="term-dots">
+            <span class="term-dot" style="background:#ff5f57"></span>
+            <span class="term-dot" style="background:#febc2e"></span>
+            <span class="term-dot" style="background:#28c840"></span>
+          </div>
+          <div class="term-title">offensive-panda@redteam:~</div>
+          <div class="term-status"><span class="term-live"></span>LIVE</div>
+        </div>
+        <div class="term-body" id="term-body"></div>
+      </div>
+
+      <!-- ── MITRE ATT&CK TICKER ── -->
+      <div class="mitre-ticker">
+        <div class="mitre-label">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#ff1a1a" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          MITRE ATT&amp;CK
+        </div>
+        <div class="mitre-track">
+          <div class="mitre-inner" id="mitre-inner">
+            <span>T1055 · Process Injection</span><span>T1059 · Command &amp; Scripting</span><span>T1003 · OS Credential Dumping</span><span>T1548 · Abuse Elevation Control</span><span>T1218 · Signed Binary Proxy</span><span>T1140 · Deobfuscate/Decode</span><span>T1027 · Obfuscated Files</span><span>T1070 · Indicator Removal</span><span>T1562 · Impair Defenses</span><span>T1134 · Access Token Manipulation</span><span>T1055 · Process Injection</span><span>T1059 · Command &amp; Scripting</span><span>T1003 · OS Credential Dumping</span><span>T1548 · Abuse Elevation Control</span><span>T1218 · Signed Binary Proxy</span><span>T1140 · Deobfuscate/Decode</span><span>T1027 · Obfuscated Files</span><span>T1070 · Indicator Removal</span><span>T1562 · Impair Defenses</span><span>T1134 · Access Token Manipulation</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ABOUT ═══ -->
+<section class="about" id="about">
+  <div class="sec-tag">01 // Who I Am</div>
+  <h2 class="sec-title">Threat Actor Perspective</h2>
+  <div class="about-grid">
+    <div>
+      <p style="color:var(--text-muted);font-size:.94rem;line-height:1.75;margin-bottom:14px;">I specialize in understanding and emulating real-world adversary techniques, redteaming, malware development — from low-level shellcode to sophisticated AV/EDR bypasses. The goal: truly think like an attacker.</p>
+      <div class="divider"></div>
+      <p style="font-family:var(--mono);font-size:.68rem;color:var(--red);letter-spacing:2px;margin-bottom:10px;">CURRENTLY FOCUSED ON</p>
+      <div class="focus-list">
+        <div class="focus-item reveal">
+          <div class="focus-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#ff1a1a" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+          Adversary Emulation &amp; Red Teaming
+        </div>
+        <div class="focus-item reveal">
+          <div class="focus-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#ff1a1a" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+          Malware Development
+        </div>
+        <div class="focus-item reveal">
+          <div class="focus-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#ff1a1a" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg></div>
+          Network Penetration Testing
+        </div>
+        <div class="focus-item reveal">
+          <div class="focus-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#ff1a1a" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+          Active Directory Exploitation
+        </div>
+        <div class="focus-item reveal">
+          <div class="focus-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#ff1a1a" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07M8.46 8.46a5 5 0 0 0 0 7.07"/></svg></div>
+          Breach &amp; Attack Simulation
+        </div>
+        <div class="focus-item reveal">
+          <div class="focus-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#ff1a1a" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg></div>
+          Security Control Validation
+        </div>
+        <div class="focus-item reveal">
+          <div class="focus-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#ff1a1a" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+          SOC Use Case Validation
+        </div>
+        <div class="focus-item reveal">
+          <div class="focus-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#ff1a1a" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+          IR Capabilities Validation
+        </div>
+        <div class="focus-item reveal">
+          <div class="focus-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#ff1a1a" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></div>
+          EDR / XDR Evasion
+        </div>
+        <div class="focus-item reveal">
+          <div class="focus-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#ff1a1a" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
+          Payload Customization
+        </div>
+      </div>
+    </div>
+    <div>
+      <p style="font-family:var(--mono);font-size:.68rem;color:var(--red);letter-spacing:2px;margin-bottom:12px;">CERTIFICATIONS</p>
+      <div class="cert-grid">
+        <div class="cert-badge reveal"><div class="cert-id">CRTP</div><div class="cert-name">Certified Red Team Professional</div></div>
+        <div class="cert-badge reveal"><div class="cert-id">CRTO</div><div class="cert-name">Certified Red Team Operator</div></div>
+        <div class="cert-badge reveal"><div class="cert-id">CRTA</div><div class="cert-name">Certified Red Team Analyst</div></div>
+        <div class="cert-badge reveal"><div class="cert-id">PJPT</div><div class="cert-name">Practical Junior Penetration Tester</div></div>
+        <div class="cert-badge reveal"><div class="cert-id">CEH</div><div class="cert-name">Certified Ethical Hacker</div></div>
+        <div class="cert-badge reveal"><div class="cert-id">HCIA</div><div class="cert-name">Huawei Certified ICT Associate</div></div>
+        <div class="cert-badge reveal"><div class="cert-id">CSFPC</div><div class="cert-name">Cyber Security Foundation</div></div>
+        <div class="cert-badge reveal"><div class="cert-id">ISO 27001</div><div class="cert-name">Information Security Mgmt</div></div>
+      </div>
+      <div class="support-row">
+        <a href="https://www.paypal.me/OFFPAN" target="_blank" class="support-btn">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+          Buy Me a Coffee
+        </a>
+        <a href="https://www.paypal.me/OFFPAN" target="_blank" class="support-btn">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+          Donate via PayPal
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SERIES ═══ -->
+<section class="series-section" id="series">
+  <div class="sec-tag">02 // Knowledge Base</div>
+  <h2 class="sec-title">Research Series</h2>
+  <div class="series-grid">
+
+    <!-- Defense Evasion -->
+    <a href="https://offensive-panda.github.io/DefenseEvasionTechniques" target="_blank" class="series-card reveal">
+      <div class="series-img-wrap">
+        <!-- Inline SVG cyber art — Defense / Shield theme -->
+        <div class="series-bg-art">
+          <svg width="100%" height="100%" viewBox="0 0 340 170" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+            <rect width="340" height="170" fill="#060608"/>
+            <!-- grid -->
+            <defs>
+              <pattern id="g1" width="22" height="22" patternUnits="userSpaceOnUse"><path d="M 22 0 L 0 0 0 22" fill="none" stroke="rgba(255,26,26,0.07)" stroke-width=".5"/></pattern>
+              <filter id="glow1"><feGaussianBlur stdDeviation="3" result="b"/><feComposite in="SourceGraphic" in2="b" operator="over"/></filter>
+            </defs>
+            <rect width="340" height="170" fill="url(#g1)"/>
+            <!-- glow blob -->
+            <ellipse cx="170" cy="85" rx="100" ry="70" fill="rgba(255,26,26,0.07)"/>
+            <!-- shield -->
+            <path d="M170 30 L210 48 L210 88 Q210 115 170 130 Q130 115 130 88 L130 48 Z" fill="rgba(255,26,26,0.1)" stroke="#ff1a1a" stroke-width="1.5" filter="url(#glow1)"/>
+            <path d="M155 80 L165 92 L185 70" stroke="#ff1a1a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <!-- pulse rings -->
+            <circle cx="170" cy="85" r="55" fill="none" stroke="rgba(255,26,26,0.15)" stroke-width="1" stroke-dasharray="4 4"/>
+            <circle cx="170" cy="85" r="75" fill="none" stroke="rgba(255,26,26,0.08)" stroke-width="1"/>
+            <!-- corner brackets -->
+            <path d="M10 10 L10 25 M10 10 L25 10" stroke="rgba(255,26,26,0.3)" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M330 10 L330 25 M330 10 L315 10" stroke="rgba(255,26,26,0.3)" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M10 160 L10 145 M10 160 L25 160" stroke="rgba(255,26,26,0.3)" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M330 160 L330 145 M330 160 L315 160" stroke="rgba(255,26,26,0.3)" stroke-width="1.5" stroke-linecap="round"/>
+            <!-- scan line -->
+            <rect x="0" y="0" width="340" height="2" fill="rgba(255,26,26,0.2)" class="scan-line"/>
+            <!-- hex nodes -->
+            <circle cx="50" cy="40" r="3" fill="#ff1a1a" opacity=".4" class="blink-dot"/>
+            <circle cx="290" cy="130" r="3" fill="#ff1a1a" opacity=".4" class="blink-dot" style="animation-delay:.6s"/>
+            <circle cx="310" cy="50" r="2" fill="#ff1a1a" opacity=".3"/>
+            <circle cx="30" cy="130" r="2" fill="#ff1a1a" opacity=".3"/>
+            <!-- label -->
+            <text x="170" y="158" text-anchor="middle" font-family="monospace" font-size="8" fill="rgba(255,26,26,0.5)" letter-spacing="3">DEFENSE EVASION</text>
+          </svg>
+        </div>
+        <!-- real GIF overlay — loads on top if available -->
+        <img class="series-gif" src="https://offensive-panda.github.io/DE.gif" alt="Defense Evasion" onerror="this.style.display='none'">
+        <div class="series-badge"></div>
+        <div class="series-icon-box">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ff1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <polyline points="9 12 11 14 15 10"/>
+          </svg>
+        </div>
+        <div class="series-num">01</div>
+      </div>
+      <div class="series-body">
+        <div class="series-label">Defense Evasion</div>
+        <div class="series-title">Advanced Evasion Techniques</div>
+        <div class="series-desc">AV/EDR bypass, payload obfuscation, syscall abuse, and living-off-the-land strategies for modern environments.</div>
+        <div class="series-link">Explore Series <span>&#8594;</span></div>
+      </div>
+    </a>
+
+    <!-- Malware Analysis -->
+    <a href="https://offensive-panda.github.io/MalwareAnalysis" target="_blank" class="series-card reveal">
+      <div class="series-img-wrap">
+        <div class="series-bg-art">
+          <svg width="100%" height="100%" viewBox="0 0 340 170" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+            <rect width="340" height="170" fill="#06080a"/>
+            <defs>
+              <pattern id="g2" width="22" height="22" patternUnits="userSpaceOnUse"><path d="M 22 0 L 0 0 0 22" fill="none" stroke="rgba(0,255,229,0.06)" stroke-width=".5"/></pattern>
+            </defs>
+            <rect width="340" height="170" fill="url(#g2)"/>
+            <ellipse cx="170" cy="85" rx="90" ry="60" fill="rgba(0,255,229,0.05)"/>
+            <!-- virus/bug central -->
+            <circle cx="170" cy="85" r="28" fill="rgba(0,255,229,0.08)" stroke="#00ffe5" stroke-width="1.5"/>
+            <circle cx="170" cy="85" r="14" fill="rgba(0,255,229,0.12)" stroke="#00ffe5" stroke-width="1"/>
+            <!-- spikes -->
+            <line x1="170" y1="57" x2="170" y2="45" stroke="#00ffe5" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="170" y1="113" x2="170" y2="125" stroke="#00ffe5" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="142" y1="85" x2="130" y2="85" stroke="#00ffe5" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="198" y1="85" x2="210" y2="85" stroke="#00ffe5" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="150" y1="65" x2="142" y2="57" stroke="#00ffe5" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="190" y1="65" x2="198" y2="57" stroke="#00ffe5" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="150" y1="105" x2="142" y2="113" stroke="#00ffe5" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="190" y1="105" x2="198" y2="113" stroke="#00ffe5" stroke-width="1.5" stroke-linecap="round"/>
+            <!-- orbit ring -->
+            <circle cx="170" cy="85" r="48" fill="none" stroke="rgba(0,255,229,0.12)" stroke-width="1" stroke-dasharray="3 5" class="rotate-slow"/>
+            <!-- dots on orbit -->
+            <circle cx="218" cy="85" r="3" fill="#00ffe5" opacity=".6"/>
+            <!-- corner brackets -->
+            <path d="M10 10 L10 22 M10 10 L22 10" stroke="rgba(0,255,229,0.25)" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M330 10 L330 22 M330 10 L318 10" stroke="rgba(0,255,229,0.25)" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M10 160 L10 148 M10 160 L22 160" stroke="rgba(0,255,229,0.25)" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M330 160 L330 148 M330 160 L318 160" stroke="rgba(0,255,229,0.25)" stroke-width="1.5" stroke-linecap="round"/>
+            <rect x="0" y="0" width="340" height="2" fill="rgba(0,255,229,0.15)" class="scan-line"/>
+            <circle cx="60" cy="50" r="2.5" fill="#00ffe5" opacity=".3" class="blink-dot" style="animation-delay:.4s"/>
+            <circle cx="280" cy="120" r="2.5" fill="#00ffe5" opacity=".3" class="blink-dot" style="animation-delay:.9s"/>
+            <text x="170" y="158" text-anchor="middle" font-family="monospace" font-size="8" fill="rgba(0,255,229,0.4)" letter-spacing="3">MALWARE ANALYSIS</text>
+          </svg>
+        </div>
+        <img class="series-gif" src="https://offensive-panda.github.io/ME.gif" alt="Malware Analysis" onerror="this.style.display='none'">
+        <div class="series-badge"></div>
+        <div class="series-icon-box" style="border-color:#00ffe5">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00ffe5" stroke-width="2" stroke-linecap="round">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+            <path d="M9 3.5A9 9 0 0 0 3.5 9"/>
+            <path d="M15 3.5A9 9 0 0 1 20.5 9"/>
+          </svg>
+        </div>
+        <div class="series-num" style="color:rgba(0,255,229,0.7);border-color:rgba(0,255,229,0.2)">02</div>
+      </div>
+      <div class="series-body">
+        <div class="series-label" style="color:#00ffe5">Malware Analysis</div>
+        <div class="series-title">Malware Analysis Series</div>
+        <div class="series-desc">Static &amp; dynamic analysis, reverse engineering PE files, behavioral dissection, and unpacking techniques.</div>
+        <div class="series-link" style="color:#00ffe5">Explore Series <span>&#8594;</span></div>
+      </div>
+    </a>
+
+    <!-- Process Injection -->
+    <a href="https://offensive-panda.github.io/ProcessInjectionTechniques" target="_blank" class="series-card reveal">
+      <div class="series-img-wrap">
+        <div class="series-bg-art">
+          <svg width="100%" height="100%" viewBox="0 0 340 170" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+            <rect width="340" height="170" fill="#080609"/>
+            <defs>
+              <pattern id="g3" width="22" height="22" patternUnits="userSpaceOnUse"><path d="M 22 0 L 0 0 0 22" fill="none" stroke="rgba(155,48,255,0.07)" stroke-width=".5"/></pattern>
+            </defs>
+            <rect width="340" height="170" fill="url(#g3)"/>
+            <ellipse cx="170" cy="85" rx="100" ry="65" fill="rgba(155,48,255,0.06)"/>
+            <!-- process boxes -->
+            <rect x="60" y="55" width="80" height="55" rx="3" fill="rgba(155,48,255,0.1)" stroke="#9b30ff" stroke-width="1.5"/>
+            <text x="100" y="80" text-anchor="middle" font-family="monospace" font-size="8" fill="#9b30ff">PROCESS A</text>
+            <text x="100" y="93" text-anchor="middle" font-family="monospace" font-size="7" fill="rgba(155,48,255,0.6)">lsass.exe</text>
+            <rect x="200" y="55" width="80" height="55" rx="3" fill="rgba(155,48,255,0.1)" stroke="#9b30ff" stroke-width="1.5"/>
+            <text x="240" y="80" text-anchor="middle" font-family="monospace" font-size="8" fill="#9b30ff">PROCESS B</text>
+            <text x="240" y="93" text-anchor="middle" font-family="monospace" font-size="7" fill="rgba(155,48,255,0.6)">inject →</text>
+            <!-- arrow -->
+            <line x1="140" y1="82" x2="200" y2="82" stroke="#9b30ff" stroke-width="2" stroke-dasharray="4 3" class="data-flow"/>
+            <polygon points="196,78 204,82 196,86" fill="#9b30ff"/>
+            <!-- shellcode blob above arrow -->
+            <rect x="155" y="65" width="30" height="14" rx="2" fill="rgba(255,26,26,0.15)" stroke="#ff1a1a" stroke-width="1"/>
+            <text x="170" y="75" text-anchor="middle" font-family="monospace" font-size="6" fill="#ff6060">SHELL</text>
+            <!-- corner brackets -->
+            <path d="M10 10 L10 22 M10 10 L22 10" stroke="rgba(155,48,255,0.3)" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M330 10 L330 22 M330 10 L318 10" stroke="rgba(155,48,255,0.3)" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M10 160 L10 148 M10 160 L22 160" stroke="rgba(155,48,255,0.3)" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M330 160 L330 148 M330 160 L318 160" stroke="rgba(155,48,255,0.3)" stroke-width="1.5" stroke-linecap="round"/>
+            <rect x="0" y="0" width="340" height="2" fill="rgba(155,48,255,0.2)" class="scan-line"/>
+            <circle cx="50" cy="130" r="2.5" fill="#9b30ff" opacity=".4" class="blink-dot" style="animation-delay:.3s"/>
+            <circle cx="300" cy="40" r="2.5" fill="#9b30ff" opacity=".4" class="blink-dot" style="animation-delay:.8s"/>
+            <text x="170" y="158" text-anchor="middle" font-family="monospace" font-size="8" fill="rgba(155,48,255,0.45)" letter-spacing="3">PROCESS INJECTION</text>
+          </svg>
+        </div>
+        <img class="series-gif" src="https://offensive-panda.github.io/PE.gif" alt="Process Injection" onerror="this.style.display='none'">
+        <div class="series-badge"></div>
+        <div class="series-icon-box" style="border-color:#9b30ff">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#9b30ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="16 18 22 12 16 6"/>
+            <polyline points="8 6 2 12 8 18"/>
+            <line x1="2" y1="12" x2="22" y2="12" stroke-dasharray="3 3"/>
+          </svg>
+        </div>
+        <div class="series-num" style="color:rgba(155,48,255,0.75);border-color:rgba(155,48,255,0.2)">03</div>
+      </div>
+      <div class="series-body">
+        <div class="series-label" style="color:#9b30ff">Process Injection</div>
+        <div class="series-title">Process Injection Techniques</div>
+        <div class="series-desc">DLL injection, reflective loading, shellcode runners, early-bird injection, and adversary TTPs in depth.</div>
+        <div class="series-link" style="color:#9b30ff">Explore Series <span>&#8594;</span></div>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<!-- ═══ PROJECTS ═══ -->
+<section class="projects" id="projects">
+  <div class="sec-tag">03 // Open Source</div>
+  <h2 class="sec-title">Pinned Projects</h2>
+  <div class="project-list">
+
+    <a href="https://github.com/Offensive-Panda/RWX_MEMEORY_HUNT_AND_INJECTION_DV" target="_blank" class="project-item reveal">
+      <div class="proj-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff1a1a" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+      </div>
+      <div>
+        <div class="project-name">RWX Memory Hunt &amp; Injection</div>
+        <div class="project-desc">Abuses Windows fork API + OneDrive.exe to inject shellcode into existing RWX regions — no VirtualProtect, no VirtualAllocEx.</div>
+        <div class="project-tags"><span class="tag cpp">C++</span></div>
+      </div>
+      <div class="proj-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>VIEW</div>
+    </a>
+
+    <a href="https://github.com/Offensive-Panda/ShadowDumper" target="_blank" class="project-item reveal">
+      <div class="proj-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff1a1a" stroke-width="2" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/><line x1="12" y1="11" x2="12" y2="21" stroke-dasharray="2 2"/></svg>
+      </div>
+      <div>
+        <div class="project-name">ShadowDumper</div>
+        <div class="project-desc">Advanced LSASS memory dumper with multiple techniques for credential extraction. Flexible red team options.</div>
+        <div class="project-tags"><span class="tag cpp">C++</span><span class="tag c">C</span><span class="tag asm">ASM</span></div>
+      </div>
+      <div class="proj-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>VIEW</div>
+    </a>
+
+    <a href="https://github.com/Offensive-Panda/D3MPSEC" target="_blank" class="project-item reveal">
+      <div class="proj-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff1a1a" stroke-width="2" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/><path d="M6 8h.01M9 8h6"/></svg>
+      </div>
+      <div>
+        <div class="project-name">D3MPSEC — Lsass Dumper</div>
+        <div class="project-desc">Dumps LSASS via direct syscalls, randomized procedures, prototype name obfuscation to bypass AV/EDR.</div>
+        <div class="project-tags"><span class="tag cpp">C++</span><span class="tag c">C</span><span class="tag asm">ASM</span></div>
+      </div>
+      <div class="proj-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>VIEW</div>
+    </a>
+
+    <a href="https://github.com/Offensive-Panda/LsassReflectDumping" target="_blank" class="project-item reveal">
+      <div class="proj-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff1a1a" stroke-width="2" stroke-linecap="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+      </div>
+      <div>
+        <div class="project-name">Lsass Reflect Dumping</div>
+        <div class="project-desc">RtlCreateProcessReflection to clone lsass.exe, MINIDUMP_CALLBACK_INFORMATION for dump. Parses with Mimikatz.</div>
+        <div class="project-tags"><span class="tag cpp">C++</span></div>
+      </div>
+      <div class="proj-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>VIEW</div>
+    </a>
+
+    <a href="https://github.com/Offensive-Panda/NT-AUTHORITY-SYSTEM-CONTEXT-RTCORE" target="_blank" class="project-item reveal">
+      <div class="proj-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff1a1a" stroke-width="2" stroke-linecap="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+      </div>
+      <div>
+        <div class="project-name">NT AUTHORITY — RTCORE Exploit</div>
+        <div class="project-desc">CVE-2019-16098 (MSI Afterburner RTCore) with dynamic Ntoskrnl.exe base and recalculated offsets for modern Windows.</div>
+        <div class="project-tags"><span class="tag cpp">C++</span></div>
+      </div>
+      <div class="proj-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>VIEW</div>
+    </a>
+
+    <a href="https://github.com/Offensive-Panda/WPM-MAJIC-ENTRY-POINT-INJECTION" target="_blank" class="project-item reveal">
+      <div class="proj-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff1a1a" stroke-width="2" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/><circle cx="12" cy="16" r="1" fill="#ff1a1a"/></svg>
+      </div>
+      <div>
+        <div class="project-name">WPM Magic Entry Point Injection</div>
+        <div class="project-desc">AddressOfEntryPoint exploit via WriteProcessMemory internal magic. Direct syscalls bypass EDR user-mode hooks.</div>
+        <div class="project-tags"><span class="tag cpp">C++</span><span class="tag c">C</span><span class="tag asm">ASM</span></div>
+      </div>
+      <div class="proj-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>VIEW</div>
+    </a>
+
+    <a href="https://github.com/Offensive-Panda/.NET_PROFILER_DLL_LOADING" target="_blank" class="project-item reveal">
+      <div class="proj-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff1a1a" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="M10 12l2 2 4-4"/></svg>
+      </div>
+      <div>
+        <div class="project-name">.NET Profiler DLL Loading</div>
+        <div class="project-desc">Abuses .NET profiler via env vars + Task Scheduler (MMC) to load malicious DLL and bypass UAC for admin escalation.</div>
+        <div class="project-tags"><span class="tag cpp">C++</span><span class="tag c">C</span></div>
+      </div>
+      <div class="proj-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>VIEW</div>
+    </a>
+
+    <a href="https://github.com/Offensive-Panda/PEB_WALK_AND_API_OBFUSCATION_INJECTION" target="_blank" class="project-item reveal">
+      <div class="proj-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff1a1a" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/><path d="M3.05 11a9 9 0 1 0 .5-2.1"/></svg>
+      </div>
+      <div>
+        <div class="project-name">PEB Walk &amp; API Obfuscation Injection</div>
+        <div class="project-desc">Dynamic API resolution via PEB walk + API call obfuscation during process injection to defeat static AV/EDR analysis.</div>
+        <div class="project-tags"><span class="tag cpp">C++</span></div>
+      </div>
+      <div class="proj-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>VIEW</div>
+    </a>
+
+    <a href="https://github.com/Offensive-Panda/DV_NEW" target="_blank" class="project-item reveal">
+      <div class="proj-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff1a1a" stroke-width="2" stroke-linecap="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/><line x1="3" y1="3" x2="21" y2="21" stroke-width="1.5" opacity=".5"/></svg>
+      </div>
+      <div>
+        <div class="project-name">Dirty Vanity New (DV_NEW)</div>
+        <div class="project-desc">Direct syscalls + egg-hunt technique to bypass EDR hooks and avoid static detection of syscall instruction stubs.</div>
+        <div class="project-tags"><span class="tag cpp">C++</span><span class="tag c">C</span><span class="tag asm">ASM</span></div>
+      </div>
+      <div class="proj-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>VIEW</div>
+    </a>
+
+  </div>
+</section>
+
+<!-- ═══ GITHUB STATS ═══ -->
+<section class="stats-section" id="stats">
+  <div class="sec-tag">04 // Activity</div>
+  <h2 class="sec-title">GitHub Stats</h2>
+
+  <div class="gh-grid">
+    <div class="gh-card reveal">
+      <div class="gh-card-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#ffd700" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+      <div class="gh-val" id="total-stars">—</div>
+      <div class="gh-lbl">Total Stars</div>
+      <div class="gh-sub">across all repos</div>
+    </div>
+    <div class="gh-card reveal">
+      <div class="gh-card-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#00ffe5" stroke-width="2"><circle cx="12" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><circle cx="18" cy="6" r="3"/><path d="M18 9v1a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V9"/><line x1="12" y1="12" x2="12" y2="15"/></svg></div>
+      <div class="gh-val" id="total-forks">—</div>
+      <div class="gh-lbl">Total Forks</div>
+      <div class="gh-sub">community forks</div>
+    </div>
+    <div class="gh-card reveal">
+      <div class="gh-card-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#ff1a1a" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></div>
+      <div class="gh-val" id="public-repos">—</div>
+      <div class="gh-lbl">Public Repos</div>
+      <div class="gh-sub">open source tools</div>
+    </div>
+    <div class="gh-card reveal">
+      <div class="gh-card-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#9b30ff" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+      <div class="gh-val" id="followers">—</div>
+      <div class="gh-lbl">Followers</div>
+      <div class="gh-sub">github followers</div>
+    </div>
+    <div class="gh-card reveal">
+      <div class="gh-card-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#00ffe5" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></div>
+      <div class="gh-val" id="total-watchers">—</div>
+      <div class="gh-lbl">Watchers</div>
+      <div class="gh-sub">repo watchers</div>
+    </div>
+    <div class="gh-card reveal">
+      <div class="gh-card-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#ff6060" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      <div class="gh-val" id="open-issues">—</div>
+      <div class="gh-lbl">Open Issues</div>
+      <div class="gh-sub">across all repos</div>
+    </div>
+    <div class="gh-card reveal">
+      <div class="gh-card-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#ffd700" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="23" y2="12"/><line x1="23" y1="8" x2="19" y2="12"/></svg></div>
+      <div class="gh-val" id="following">—</div>
+      <div class="gh-lbl">Following</div>
+      <div class="gh-sub">accounts followed</div>
+    </div>
+    <div class="gh-card reveal">
+      <div class="gh-card-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#9b30ff" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+      <div class="gh-val" id="member-since">—</div>
+      <div class="gh-lbl">Member Since</div>
+      <div class="gh-sub">github member</div>
+    </div>
+  </div>
+
+  <div class="lang-wrap reveal">
+    <div class="lang-title">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ff1a1a" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      LANGUAGE BREAKDOWN
+    </div>
+    <div class="lang-bars" id="lang-bars">
+      <div style="font-family:var(--mono);font-size:.72rem;color:var(--text-muted)">Loading…</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CONNECT ═══ -->
+<section class="connect" id="connect">
+  <div class="connect-inner">
+    <div>
+      <div class="sec-tag">05 // Contact</div>
+      <h2 class="connect-headline">Let's <span class="red">Connect.</span></h2>
+      <p class="connect-sub">Follow my research, reach out for collaboration, or just say hello across these platforms.</p>
+    </div>
+    <div class="social-list">
+      <a href="https://twitter.com/usmansikander13" target="_blank" class="social-link reveal">
+        <div class="social-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c8ccd8" stroke-width="2"><path d="M4 4l16 16M4 20L20 4"/></svg>
+        </div>
+        <div class="social-info"><div class="social-platform">Twitter / X</div><div class="social-handle">@usmansikander13</div></div>
+        <div class="social-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+      </a>
+      <a href="https://linkedin.com/in/usman-sikander13" target="_blank" class="social-link reveal">
+        <div class="social-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c8ccd8" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        </div>
+        <div class="social-info"><div class="social-platform">LinkedIn</div><div class="social-handle">usman-sikander13</div></div>
+        <div class="social-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+      </a>
+      <a href="https://medium.com/@merasor07" target="_blank" class="social-link reveal">
+        <div class="social-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c8ccd8" stroke-width="2"><path d="M4 4h16v16H4z" rx="2"/><line x1="8" y1="9" x2="16" y2="9"/><line x1="8" y1="13" x2="14" y2="13"/><line x1="8" y1="17" x2="12" y2="17"/></svg>
+        </div>
+        <div class="social-info"><div class="social-platform">Medium</div><div class="social-handle">@merasor07</div></div>
+        <div class="social-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+      </a>
+      <a href="https://github.com/Offensive-Panda" target="_blank" class="social-link reveal">
+        <div class="social-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c8ccd8" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+        </div>
+        <div class="social-info"><div class="social-platform">GitHub</div><div class="social-handle">Offensive-Panda</div></div>
+        <div class="social-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-brand">OFFENSIVE-PANDA</div>
+  <div class="footer-copy">© <span id="footer-year">2025</span> Usman Sikander</div>
+  <div class="footer-copy" style="display:flex;align-items:center;gap:6px">
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="#ff1a1a"><circle cx="12" cy="12" r="10"/></svg>
+    Stay Red.
+  </div>
+</footer>
+
+<script>
+// REVEAL
+const obs = new IntersectionObserver(entries => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), i * 50);
+      obs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.07 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+// ── TERMINAL TYPEWRITER ──────────────────────────────
+const sequences = [
+  [
+    {type:'cmd', text:'./shadowdumper --target lsass --method reflective'},
+    {type:'out', cls:'ok',   text:'[+] Process handle acquired: lsass.exe (PID 724)'},
+    {type:'out', cls:'ok',   text:'[+] Reflection clone created successfully'},
+    {type:'out', cls:'hi',   text:'[*] Dumping memory: ████████████ 100%'},
+    {type:'out', cls:'ok',   text:'[+] Credential dump saved → /tmp/.shadow.dmp'},
+  ],
+  [
+    {type:'cmd', text:'./edr_bypass --technique direct-syscall --payload calc.bin'},
+    {type:'out', cls:'warn', text:'[!] EDR hook detected on NtAllocateVirtualMemory'},
+    {type:'out', cls:'ok',   text:'[+] Direct syscall stub loaded via egg-hunt'},
+    {type:'out', cls:'ok',   text:'[+] Shellcode injected into svchost.exe (PID 1032)'},
+    {type:'out', cls:'hi',   text:'[*] Execution successful — EDR blind to injection'},
+  ],
+  [
+    {type:'cmd', text:'mimikatz # sekurlsa::logonpasswords'},
+    {type:'out', cls:'hi',   text:'Authentication Id : 0 ; 99231'},
+    {type:'out', cls:'warn', text:'UserName : Administrator'},
+    {type:'out', cls:'ok',   text:'NTLM     : 8846f7eaee8fb117ad06bdd830b7586c'},
+    {type:'out', cls:'ok',   text:'[+] Hash captured — pass-the-hash ready'},
+  ],
+  [
+    {type:'cmd', text:'crackmapexec smb 192.168.1.0/24 -u admin -H 8846f7ea'},
+    {type:'out', cls:'ok',   text:'SMB  192.168.1.10  [+] DOMAIN\\admin (Pwn3d!)'},
+    {type:'out', cls:'ok',   text:'SMB  192.168.1.22  [+] DOMAIN\\admin (Pwn3d!)'},
+    {type:'out', cls:'warn', text:'SMB  192.168.1.31  [-] DOMAIN\\admin STATUS_LOGON_FAILURE'},
+    {type:'out', cls:'hi',   text:'[*] Lateral movement path identified → DC01'},
+  ],
+];
+
+let seqIdx = 0;
+const termBody = document.getElementById('term-body');
+
+function sleep(ms){ return new Promise(r => setTimeout(r, ms)); }
+
+async function typeLine(text, el){
+  for(let i=0; i<text.length; i++){
+    el.textContent = text.slice(0,i+1);
+    await sleep(28 + Math.random()*18);
+  }
+}
+
+async function runSequence(){
+  const seq = sequences[seqIdx % sequences.length];
+  seqIdx++;
+  termBody.innerHTML = '';
+
+  for(let i=0; i<seq.length; i++){
+    const item = seq[i];
+    const row = document.createElement('div');
+
+    if(item.type === 'cmd'){
+      row.className = 'term-line';
+      row.innerHTML = '<span class="term-prompt">$</span><span class="term-cmd"></span>';
+      termBody.appendChild(row);
+      const caret = document.createElement('span');
+      caret.className = 'term-caret';
+      row.appendChild(caret);
+      await typeLine(item.text, row.querySelector('.term-cmd'));
+      row.removeChild(caret);
+      await sleep(180);
+    } else {
+      await sleep(120);
+      row.className = `term-out ${item.cls||''}`;
+      row.textContent = '';
+      termBody.appendChild(row);
+      await typeLine(item.text, row);
+    }
+    await sleep(60);
+  }
+
+  // blinking prompt at end
+  const endRow = document.createElement('div');
+  endRow.className = 'term-line';
+  endRow.innerHTML = '<span class="term-prompt">$</span><span class="term-caret"></span>';
+  termBody.appendChild(endRow);
+
+  await sleep(3200);
+  // fade out and restart
+  termBody.style.opacity = '0';
+  termBody.style.transition = 'opacity .4s';
+  await sleep(420);
+  termBody.style.opacity = '1';
+  runSequence();
+}
+
+// start after hero animation settles
+setTimeout(runSequence, 1200);
+
+async function loadStats() {
+  try {
+    const [uRes, rRes] = await Promise.all([
+      fetch('https://api.github.com/users/offensive-panda'),
+      fetch('https://api.github.com/users/offensive-panda/repos?per_page=100')
+    ]);
+    if (!uRes.ok) throw new Error('limit');
+    const user = await uRes.json();
+    const repos = await rRes.json();
+
+    let stars=0, forks=0, watchers=0, issues=0;
+    const langs = {};
+    repos.forEach(r => {
+      stars    += r.stargazers_count||0;
+      forks    += r.forks_count||0;
+      watchers += r.watchers_count||0;
+      issues   += r.open_issues_count||0;
+      if (r.language) langs[r.language] = (langs[r.language]||0)+1;
+    });
+
+    const fmt = n => n>=1000 ? (n/1000).toFixed(1)+'k' : String(n);
+    const yr = new Date(user.created_at).getFullYear();
+
+    // stats section
+    document.getElementById('total-stars').textContent   = fmt(stars);
+    document.getElementById('total-forks').textContent   = fmt(forks);
+    document.getElementById('public-repos').textContent  = user.public_repos;
+    document.getElementById('followers').textContent     = fmt(user.followers);
+    document.getElementById('total-watchers').textContent= fmt(watchers);
+    document.getElementById('open-issues').textContent   = issues;
+    document.getElementById('following').textContent     = user.following;
+    document.getElementById('member-since').textContent  = yr;
+
+    // language bars
+    const colors = {'C++':'#ff1a1a','C':'#00ffe5','Assembly':'#ffd700','C#':'#9b30ff','Python':'#3b82f6','Batch':'#f97316','PowerShell':'#22c55e','HTML':'#f59e0b'};
+    const total = Object.values(langs).reduce((a,b)=>a+b,0)||1;
+    const sorted = Object.entries(langs).sort((a,b)=>b[1]-a[1]).slice(0,7);
+    document.getElementById('lang-bars').innerHTML = sorted.map(([lang,cnt]) => {
+      const pct = ((cnt/total)*100).toFixed(1);
+      const col = colors[lang]||'#5a5e72';
+      return `<div class="lang-row">
+        <div class="lang-name"><span class="lang-dot" style="background:${col}"></span>${lang}</div>
+        <div class="lang-track"><div class="lang-fill" style="width:0%;background:${col}" data-w="${pct}%"></div></div>
+        <div class="lang-pct">${pct}%</div>
+      </div>`;
+    }).join('');
+    requestAnimationFrame(() => {
+      document.querySelectorAll('.lang-fill').forEach(b => {
+        setTimeout(() => b.style.width = b.dataset.w, 300);
+      });
+    });
+
+  } catch(e) {
+    // graceful fallback
+    const fb = {'h-stars':'580','total-stars':'580','h-forks':'160','total-forks':'160','h-repos':'22','public-repos':'22','h-followers':'1.2k','followers':'1.2k','total-watchers':'160','open-issues':'8','following':'12','member-since':'2020'};
+    Object.entries(fb).forEach(([id,v])=>{ const el=document.getElementById(id); if(el) el.textContent=v; });
+    document.getElementById('lang-bars').innerHTML = [
+      ['C++','#ff1a1a',62],['C','#00ffe5',22],['Assembly','#ffd700',12],['C#','#9b30ff',4]
+    ].map(([l,c,p])=>`<div class="lang-row"><div class="lang-name"><span class="lang-dot" style="background:${c}"></span>${l}</div><div class="lang-track"><div class="lang-fill" style="width:${p}%;background:${c}"></div></div><div class="lang-pct">${p}%</div></div>`).join('');
+  }
+}
+loadStats();
+document.getElementById('footer-year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
