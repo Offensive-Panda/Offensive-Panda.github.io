@@ -24,7 +24,7 @@
 
   /* NAV */
   nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:13px 5%;background:rgba(6,6,8,0.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
-  .nav-logo{font-family:var(--display);font-size:0.78rem;font-weight:900;color:var(--gold);letter-spacing:3px;text-decoration:none}
+  .nav-logo{font-family:var(--display);font-size:0.78rem;font-weight:900;color:var(--red);letter-spacing:3px;text-decoration:none}
   .nav-links{display:flex;gap:26px;list-style:none}
   .nav-links a{font-family:var(--mono);font-size:0.7rem;color:var(--cyan);text-decoration:none;letter-spacing:2px;text-transform:uppercase;transition:color .2s}
   .nav-links a:hover{color:var(--cyan)}
@@ -39,10 +39,10 @@
   .hero-label{font-family:var(--mono);font-size:0.7rem;color:var(--green);letter-spacing:4px;text-transform:uppercase;margin-bottom:14px;opacity:0;animation:fadeUp .7s .2s forwards}
   .hero-label::before{content:'▶ '}
   .hero-name{font-family:var(--display);font-size:clamp(2.4rem,6vw,5.5rem);font-weight:900;line-height:.95;letter-spacing:-2px;margin-bottom:14px;opacity:0;animation:fadeUp .7s .35s forwards}
-  .hero-name .red{color:var(--red)}
+  .hero-name .red{color:var(--gold)}
   .hero-name .outline{color:transparent;-webkit-text-stroke:1px rgba(255,26,26,0.35);display:block}
   .hero-title{font-family:var(--mono);font-size:.76rem;color:var(--cyan);letter-spacing:2px;margin-bottom:18px;opacity:0;animation:fadeUp .7s .5s forwards}
-  .hero-desc{max-width:520px;width:100%;font-size:.98rem;color:var(--text-muted);line-height:1.65;margin-bottom:26px;opacity:0;animation:fadeUp .7s .62s forwards;white-space:normal;overflow-wrap:break-word;word-break:break-word}
+  .hero-desc{max-width:520px;width:100%;font-size:.98rem;color:var(--green);line-height:1.65;margin-bottom:26px;opacity:0;animation:fadeUp .7s .62s forwards;white-space:normal;overflow-wrap:break-word;word-break:break-word}
   .hero-actions{display:flex;gap:12px;flex-wrap:wrap;opacity:0;animation:fadeUp .7s .75s forwards}
   .hero-right{display:flex;flex-direction:column;gap:10px;opacity:0;animation:fadeIn 1s 1s forwards}
   .stat-badge{background:var(--bg3);border:1px solid var(--border);padding:13px 18px;display:flex;align-items:center;gap:13px;clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));min-width:175px}
@@ -324,7 +324,7 @@
   <h2 class="sec-title">Threat Actor Perspective</h2>
   <div class="about-grid">
     <div>
-      <p style="color:var(--text-muted);font-size:.94rem;line-height:1.75;margin-bottom:14px;">I specialize in understanding and emulating real-world adversary techniques, redteaming, malware development — from low-level shellcode to sophisticated AV/EDR bypasses. The goal: truly think like an attacker.</p>
+      <p style="color:var(--green);font-size:.94rem;line-height:1.75;margin-bottom:14px;">I specialize in understanding and emulating real-world adversary techniques, redteaming, malware development — from low-level shellcode to sophisticated AV/EDR bypasses. The goal: truly think like an attacker.</p>
       <div class="divider"></div>
       <p style="font-family:var(--mono);font-size:.68rem;color:var(--red);letter-spacing:2px;margin-bottom:10px;">CURRENTLY FOCUSED ON</p>
       <div class="focus-list">
@@ -564,10 +564,10 @@
         <div class="series-num" style="color:rgba(155,48,255,0.75);border-color:rgba(155,48,255,0.2)">03</div>
       </div>
       <div class="series-body">
-        <div class="series-label" style="color:#9b30ff">Process Injection</div>
+        <div class="series-label" style="color:##F5C542">Process Injection</div>
         <div class="series-title">Process Injection Techniques</div>
         <div class="series-desc">DLL injection, reflective loading, shellcode runners, early-bird injection, and adversary TTPs in depth.</div>
-        <div class="series-link" style="color:#9b30ff">Explore Series <span>&#8594;</span></div>
+        <div class="series-link" style="color:##F5C542">Explore Series <span>&#8594;</span></div>
       </div>
     </a>
 
