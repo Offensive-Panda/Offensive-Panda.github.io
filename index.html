@@ -8,10 +8,10 @@
 <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-  --red:#ff1a1a; --purple:#9b30ff; --cyan:#00ffe5; --gold:#ffd700;
+  --red:#ff1a1a; --purple:#9b30ff; --cyan:#00ffe5; --gold:#ffd700; --green:#ffffff;
   --bg:#060608; --bg2:#0c0d11; --bg3:#111318;
   --border:rgba(255,26,26,0.18);
-  --text:#e8ecf4;
+  --text:#ffffff;
   --text-muted:#a0a8c0;
   --mono:'Share Tech Mono',monospace;
   --display:'Orbitron',sans-serif;
@@ -34,7 +34,7 @@
   .hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,26,26,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,26,26,0.04) 1px,transparent 1px);background-size:55px 55px;mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 0%,transparent 100%)}
   .hero-glow{position:absolute;top:-150px;right:-150px;width:600px;height:600px;background:radial-gradient(circle,rgba(255,26,26,0.1) 0%,transparent 70%);pointer-events:none}
   .hero-glow2{position:absolute;bottom:-200px;left:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(155,48,255,0.07) 0%,transparent 70%);pointer-events:none}
-  .hero-content{display:grid;grid-template-columns:1fr;gap:40px;align-items:center;position:relative;z-index:1;max-width:700px;width:100%;min-width:0}
+  .hero-content{display:grid;grid-template-columns:1.15fr 0.85fr;gap:44px;align-items:center;position:relative;z-index:1;width:100%;min-width:0}
   .hero-left{min-width:0}
   .hero-label{font-family:var(--mono);font-size:0.7rem;color:var(--green);letter-spacing:4px;text-transform:uppercase;margin-bottom:14px;opacity:0;animation:fadeUp .7s .2s forwards}
   .hero-label::before{content:'▶ '}
@@ -44,11 +44,28 @@
   .hero-title{font-family:var(--mono);font-size:.76rem;color:var(--cyan);letter-spacing:2px;margin-bottom:18px;opacity:0;animation:fadeUp .7s .5s forwards}
   .hero-desc{max-width:520px;width:100%;font-size:.98rem;color:var(--green);line-height:1.65;margin-bottom:26px;opacity:0;animation:fadeUp .7s .62s forwards;white-space:normal;overflow-wrap:break-word;word-break:break-word}
   .hero-actions{display:flex;gap:12px;flex-wrap:wrap;opacity:0;animation:fadeUp .7s .75s forwards}
-  .hero-right{display:flex;flex-direction:column;gap:10px;opacity:0;animation:fadeIn 1s 1s forwards}
+  .hero-right{display:flex;flex-direction:column;gap:0;opacity:0;animation:fadeIn 1s 1s forwards;align-items:stretch;justify-content:center}
   .stat-badge{background:var(--bg3);border:1px solid var(--border);padding:13px 18px;display:flex;align-items:center;gap:13px;clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));min-width:175px}
   .stat-badge-icon{flex-shrink:0}
   .stat-badge-val{font-family:var(--display);font-size:1.25rem;font-weight:700;color:#fff;line-height:1}
   .stat-badge-lbl{font-family:var(--mono);font-size:0.6rem;color:var(--text-muted);letter-spacing:1px;margin-top:2px}
+  /* ── HERO VIZ PANEL ── */
+  .hero-viz-panel{padding-left:4px}
+  .viz-frame{background:#060608;border:1px solid rgba(255,26,26,0.24);width:100%;display:flex;flex-direction:column;clip-path:polygon(0 0,calc(100% - 16px) 0,100% 16px,100% 100%,16px 100%,0 calc(100% - 16px));box-shadow:0 0 50px rgba(255,26,26,0.07),inset 0 0 30px rgba(0,0,0,0.5)}
+  .viz-hdr{display:flex;align-items:center;gap:8px;padding:8px 13px;background:#0b0c0f;border-bottom:1px solid rgba(255,26,26,0.12);flex-shrink:0}
+  .viz-hdot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+  .viz-htitle{font-family:var(--mono);font-size:.58rem;color:var(--text-muted);letter-spacing:1px;flex:1;text-align:center}
+  .viz-hstat{display:flex;align-items:center;gap:5px;font-family:var(--mono);font-size:.56rem;color:rgba(255,26,26,0.85);letter-spacing:2px;flex-shrink:0}
+  .viz-hlive{width:5px;height:5px;border-radius:50%;background:#ff1a1a;animation:blink 1s step-end infinite}
+  .radar-svg{width:100%;height:auto;display:block}
+  .viz-metrics{display:flex;justify-content:space-around;padding:9px 12px;border-top:1px solid rgba(255,26,26,0.1);flex-shrink:0;background:#09090b}
+  .viz-metric{display:flex;flex-direction:column;align-items:center;gap:2px}
+  .viz-mval{font-family:var(--display);font-size:.75rem;font-weight:700;letter-spacing:2px;line-height:1}
+  .viz-mval.r{color:#ff1a1a}
+  .viz-mval.c{color:#00ffe5}
+  .viz-mval.p{color:#9b30ff}
+  .viz-mlbl{font-family:var(--mono);font-size:.5rem;color:var(--text-muted);letter-spacing:1px;margin-top:1px}
+  @media(max-width:900px){.hero-viz-panel{display:none}}
 
   /* BUTTONS */
   .btn{display:inline-flex;align-items:center;gap:8px;padding:11px 24px;font-family:var(--mono);font-size:.76rem;letter-spacing:2px;text-transform:uppercase;text-decoration:none;transition:all .22s;cursor:pointer;border:none;clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px))}
@@ -189,7 +206,7 @@
 
 
   /* ── HERO TERMINAL ── */
-  .hero-terminal{margin-top:28px;background:#0a0b0e;border:1px solid rgba(255,26,26,0.25);max-width:620px;width:100%;opacity:0;animation:fadeUp .7s 1s forwards}
+  .hero-terminal{margin-top:28px;background:#0a0b0e;border:1px solid rgba(255,26,26,0.25);max-width:100%;width:100%;opacity:0;animation:fadeUp .7s 1s forwards}
   .term-bar{display:flex;align-items:center;gap:10px;padding:8px 14px;background:#0e0f13;border-bottom:1px solid rgba(255,26,26,0.12)}
   .term-dots{display:flex;gap:5px}
   .term-dot{width:10px;height:10px;border-radius:50%;display:block}
@@ -207,7 +224,7 @@
   .term-caret{display:inline-block;width:7px;height:.8em;background:#ff1a1a;animation:blink 1s step-end infinite;vertical-align:middle;margin-left:2px}
 
   /* ── MITRE TICKER ── */
-  .mitre-ticker{display:flex;align-items:center;gap:0;margin-top:14px;max-width:620px;width:100%;overflow:hidden;border:1px solid rgba(255,26,26,0.15);opacity:0;animation:fadeUp .7s 1.15s forwards}
+  .mitre-ticker{display:flex;align-items:center;gap:0;margin-top:14px;max-width:100%;width:100%;overflow:hidden;border:1px solid rgba(255,26,26,0.15);opacity:0;animation:fadeUp .7s 1.15s forwards}
   .mitre-label{font-family:var(--mono);font-size:.6rem;color:#ff1a1a;letter-spacing:2px;white-space:nowrap;padding:7px 12px;background:rgba(255,26,26,0.1);border-right:1px solid rgba(255,26,26,0.2);display:flex;align-items:center;gap:5px;flex-shrink:0}
   .mitre-track{flex:1;min-width:0;overflow:hidden;padding:7px 0}
   .mitre-inner{display:flex;gap:0;white-space:nowrap;animation:tickerScroll 28s linear infinite}
@@ -314,6 +331,174 @@
         </div>
       </div>
 
+    </div>
+    <!-- ── HERO THREAT MATRIX ── -->
+    <div class="hero-right hero-viz-panel">
+      <div class="viz-frame">
+        <div class="viz-hdr">
+          <span class="viz-hdot" style="background:#ff5f57"></span>
+          <span class="viz-hdot" style="background:#febc2e"></span>
+          <span class="viz-hdot" style="background:#28c840"></span>
+          <span class="viz-htitle">ADVERSARY_MATRIX_v2.1 — ARMED</span>
+          <span class="viz-hstat"><span class="viz-hlive"></span>LIVE</span>
+        </div>
+        <svg class="radar-svg" viewBox="0 0 520 520" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="hrGlow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#ff1a1a" stop-opacity="0.38"/>
+              <stop offset="70%" stop-color="#ff1a1a" stop-opacity="0.06"/>
+              <stop offset="100%" stop-color="#ff1a1a" stop-opacity="0"/>
+            </radialGradient>
+            <radialGradient id="hrCyan" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#00ffe5" stop-opacity="0.15"/>
+              <stop offset="100%" stop-color="#00ffe5" stop-opacity="0"/>
+            </radialGradient>
+            <filter id="hrFG" x="-60%" y="-60%" width="220%" height="220%">
+              <feGaussianBlur stdDeviation="2.8" result="b"/>
+              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+            <filter id="hrFG2" x="-100%" y="-100%" width="300%" height="300%">
+              <feGaussianBlur stdDeviation="6" result="b"/>
+              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+            <clipPath id="hrClip"><circle cx="260" cy="260" r="196"/></clipPath>
+          </defs>
+
+          <!-- Outer dark ring -->
+          <circle cx="260" cy="260" r="200" fill="#040406" stroke="rgba(255,26,26,0.18)" stroke-width="1.5"/>
+
+          <!-- Radar interior (clipped) -->
+          <g clip-path="url(#hrClip)">
+            <!-- Polar grid lines -->
+            <line x1="260" y1="64" x2="260" y2="456" stroke="rgba(255,26,26,0.07)" stroke-width=".5"/>
+            <line x1="64" y1="260" x2="456" y2="260" stroke="rgba(255,26,26,0.07)" stroke-width=".5"/>
+            <line x1="121" y1="121" x2="399" y2="399" stroke="rgba(255,26,26,0.04)" stroke-width=".5"/>
+            <line x1="399" y1="121" x2="121" y2="399" stroke="rgba(255,26,26,0.04)" stroke-width=".5"/>
+            <!-- Concentric rings -->
+            <circle cx="260" cy="260" r="52" fill="none" stroke="rgba(255,26,26,0.13)" stroke-width=".5"/>
+            <circle cx="260" cy="260" r="104" fill="none" stroke="rgba(255,26,26,0.1)" stroke-width=".5"/>
+            <circle cx="260" cy="260" r="156" fill="none" stroke="rgba(255,26,26,0.07)" stroke-width=".5"/>
+            <!-- Scanning beam -->
+            <g>
+              <animateTransform attributeName="transform" type="rotate" from="0 260 260" to="360 260 260" dur="3.6s" repeatCount="indefinite"/>
+              <path d="M260 260 L260 64 A196 196 0 0 1 456 260 Z" fill="rgba(255,26,26,0.17)"/>
+              <path d="M260 260 L260 64 A196 196 0 0 1 399 121 Z" fill="rgba(255,26,26,0.13)"/>
+              <path d="M260 260 L260 64 A196 196 0 0 1 321 73 Z" fill="rgba(255,26,26,0.08)"/>
+            </g>
+            <!-- Center ambient glow -->
+            <circle cx="260" cy="260" r="100" fill="url(#hrGlow)" opacity=".8"/>
+            <circle cx="260" cy="260" r="55" fill="url(#hrCyan)" opacity=".6"/>
+          </g>
+
+          <!-- Outer rotating rings -->
+          <circle cx="260" cy="260" r="198" fill="none" stroke="rgba(255,26,26,0.32)" stroke-width="1" stroke-dasharray="10 5">
+            <animateTransform attributeName="transform" type="rotate" from="0 260 260" to="360 260 260" dur="22s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="260" cy="260" r="165" fill="none" stroke="rgba(0,255,229,0.1)" stroke-width=".8" stroke-dasharray="5 9">
+            <animateTransform attributeName="transform" type="rotate" from="0 260 260" to="-360 260 260" dur="30s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="260" cy="260" r="126" fill="none" stroke="rgba(155,48,255,0.1)" stroke-width=".8" stroke-dasharray="3 7">
+            <animateTransform attributeName="transform" type="rotate" from="0 260 260" to="360 260 260" dur="18s" repeatCount="indefinite"/>
+          </circle>
+
+          <!-- Center hexagon + crosshair -->
+          <polygon points="260,234 282,247 282,273 260,286 238,273 238,247" fill="rgba(255,26,26,0.14)" stroke="#ff1a1a" stroke-width="1.5" filter="url(#hrFG)"/>
+          <polygon points="260,242 274,250 274,270 260,278 246,270 246,250" fill="none" stroke="rgba(255,26,26,0.32)" stroke-width=".8"/>
+          <line x1="260" y1="245" x2="260" y2="275" stroke="#ff1a1a" stroke-width="1.5" opacity=".9"/>
+          <line x1="246" y1="260" x2="274" y2="260" stroke="#ff1a1a" stroke-width="1.5" opacity=".9"/>
+          <circle cx="260" cy="260" r="5.5" fill="none" stroke="#ff1a1a" stroke-width="1.5"/>
+          <circle cx="260" cy="260" r="2.2" fill="#ff1a1a" filter="url(#hrFG2)"/>
+
+          <!-- ═══ THREAT NODES ═══ -->
+          <!-- N · T1055 Process Injection -->
+          <line x1="260" y1="125" x2="260" y2="238" stroke="rgba(255,26,26,0.3)" stroke-width=".8" stroke-dasharray="4 3"/>
+          <circle cx="260" cy="124" r="5.5" fill="#ff1a1a" filter="url(#hrFG)">
+            <animate attributeName="opacity" values="1;.35;1" dur="1.8s" repeatCount="indefinite"/>
+          </circle>
+          <rect x="205" y="96" width="110" height="20" rx="1" fill="rgba(4,4,7,.96)" stroke="rgba(255,26,26,.45)" stroke-width=".8"/>
+          <text x="260" y="111" text-anchor="middle" font-family="monospace" font-size="8" fill="#ff5555" letter-spacing="1">T1055 · INJECT</text>
+
+          <!-- NE · T1003 LSASS Dump -->
+          <line x1="355" y1="164" x2="280" y2="240" stroke="rgba(255,26,26,0.3)" stroke-width=".8" stroke-dasharray="4 3"/>
+          <circle cx="357" cy="163" r="5" fill="#ff1a1a" filter="url(#hrFG)">
+            <animate attributeName="opacity" values=".9;.3;.9" dur="2.3s" begin=".5s" repeatCount="indefinite"/>
+          </circle>
+          <rect x="364" y="148" width="106" height="20" rx="1" fill="rgba(4,4,7,.96)" stroke="rgba(255,26,26,.4)" stroke-width=".8"/>
+          <text x="417" y="163" text-anchor="middle" font-family="monospace" font-size="8" fill="#ff5555" letter-spacing="1">T1003 · LSASS</text>
+
+          <!-- E · T1548 Privilege Escalation -->
+          <line x1="397" y1="260" x2="282" y2="260" stroke="rgba(0,255,229,0.38)" stroke-width=".8" stroke-dasharray="4 3"/>
+          <circle cx="398" cy="260" r="5" fill="#00ffe5" filter="url(#hrFG)">
+            <animate attributeName="opacity" values=".9;.3;.9" dur="1.7s" begin=".8s" repeatCount="indefinite"/>
+          </circle>
+          <rect x="406" y="249" width="108" height="20" rx="1" fill="rgba(4,4,7,.96)" stroke="rgba(0,255,229,.35)" stroke-width=".8"/>
+          <text x="460" y="263" text-anchor="middle" font-family="monospace" font-size="8" fill="#00ffe5" letter-spacing="1">T1548 · PRIV-ESC</text>
+
+          <!-- SE · T1027 Obfuscation -->
+          <line x1="355" y1="356" x2="282" y2="282" stroke="rgba(155,48,255,0.38)" stroke-width=".8" stroke-dasharray="4 3"/>
+          <circle cx="357" cy="357" r="5" fill="#9b30ff" filter="url(#hrFG)">
+            <animate attributeName="opacity" values=".9;.3;.9" dur="2.6s" begin="1.1s" repeatCount="indefinite"/>
+          </circle>
+          <rect x="364" y="361" width="106" height="20" rx="1" fill="rgba(4,4,7,.96)" stroke="rgba(155,48,255,.35)" stroke-width=".8"/>
+          <text x="417" y="376" text-anchor="middle" font-family="monospace" font-size="8" fill="#bb60ff" letter-spacing="1">T1027 · OBFUSC</text>
+
+          <!-- S · T1070 Indicator Removal -->
+          <line x1="260" y1="396" x2="260" y2="282" stroke="rgba(255,26,26,0.3)" stroke-width=".8" stroke-dasharray="4 3"/>
+          <circle cx="260" cy="397" r="5.5" fill="#ff1a1a" filter="url(#hrFG)">
+            <animate attributeName="opacity" values="1;.35;1" dur="2s" begin=".3s" repeatCount="indefinite"/>
+          </circle>
+          <rect x="205" y="404" width="110" height="20" rx="1" fill="rgba(4,4,7,.96)" stroke="rgba(255,26,26,.45)" stroke-width=".8"/>
+          <text x="260" y="419" text-anchor="middle" font-family="monospace" font-size="8" fill="#ff5555" letter-spacing="1">T1070 · CLEANUP</text>
+
+          <!-- SW · T1562 Impair Defenses -->
+          <line x1="165" y1="356" x2="240" y2="282" stroke="rgba(255,200,0,0.38)" stroke-width=".8" stroke-dasharray="4 3"/>
+          <circle cx="163" cy="357" r="5" fill="#ffd700" filter="url(#hrFG)">
+            <animate attributeName="opacity" values=".9;.3;.9" dur="2.4s" begin=".6s" repeatCount="indefinite"/>
+          </circle>
+          <rect x="50" y="361" width="110" height="20" rx="1" fill="rgba(4,4,7,.96)" stroke="rgba(255,200,0,.35)" stroke-width=".8"/>
+          <text x="105" y="376" text-anchor="middle" font-family="monospace" font-size="8" fill="#ffd700" letter-spacing="1">T1562 · DEFKILL</text>
+
+          <!-- W · T1134 Token Manipulation -->
+          <line x1="123" y1="260" x2="238" y2="260" stroke="rgba(0,255,229,0.38)" stroke-width=".8" stroke-dasharray="4 3"/>
+          <circle cx="122" cy="260" r="5" fill="#00ffe5" filter="url(#hrFG)">
+            <animate attributeName="opacity" values=".8;.2;.8" dur="1.9s" begin=".9s" repeatCount="indefinite"/>
+          </circle>
+          <rect x="6" y="249" width="113" height="20" rx="1" fill="rgba(4,4,7,.96)" stroke="rgba(0,255,229,.35)" stroke-width=".8"/>
+          <text x="62" y="263" text-anchor="middle" font-family="monospace" font-size="8" fill="#00ffe5" letter-spacing="1">T1134 · TOKEN</text>
+
+          <!-- NW · T1059 Command Scripting -->
+          <line x1="165" y1="164" x2="240" y2="240" stroke="rgba(155,48,255,0.38)" stroke-width=".8" stroke-dasharray="4 3"/>
+          <circle cx="163" cy="163" r="5" fill="#9b30ff" filter="url(#hrFG)">
+            <animate attributeName="opacity" values=".9;.3;.9" dur="2.1s" begin=".2s" repeatCount="indefinite"/>
+          </circle>
+          <rect x="50" y="148" width="110" height="20" rx="1" fill="rgba(4,4,7,.96)" stroke="rgba(155,48,255,.35)" stroke-width=".8"/>
+          <text x="105" y="163" text-anchor="middle" font-family="monospace" font-size="8" fill="#bb60ff" letter-spacing="1">T1059 · SCRIPT</text>
+
+          <!-- Corner HUD brackets -->
+          <path d="M8 8 L8 26 M8 8 L26 8" stroke="rgba(255,26,26,.52)" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+          <path d="M512 8 L512 26 M512 8 L494 8" stroke="rgba(255,26,26,.52)" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+          <path d="M8 512 L8 494 M8 512 L26 512" stroke="rgba(255,26,26,.52)" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+          <path d="M512 512 L512 494 M512 512 L494 512" stroke="rgba(255,26,26,.52)" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+          <!-- HUD labels -->
+          <text x="260" y="21" text-anchor="middle" font-family="monospace" font-size="8" fill="rgba(255,26,26,.72)" letter-spacing="3.5">ADVERSARY MATRIX</text>
+          <text x="30" y="512" font-family="monospace" font-size="7" fill="rgba(0,255,229,.52)">SYS: ARMED</text>
+          <text x="490" y="512" text-anchor="end" font-family="monospace" font-size="7" fill="rgba(255,26,26,.58)">TTPs: 8/8</text>
+        </svg>
+        <div class="viz-metrics">
+          <div class="viz-metric">
+            <span class="viz-mval r">ARMED</span>
+            <span class="viz-mlbl">OP STATUS</span>
+          </div>
+          <div class="viz-metric">
+            <span class="viz-mval c">08</span>
+            <span class="viz-mlbl">ACTIVE TTPs</span>
+          </div>
+          <div class="viz-metric">
+            <span class="viz-mval p">RED</span>
+            <span class="viz-mlbl">TEAM SIDE</span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
